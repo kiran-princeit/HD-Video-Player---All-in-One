@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_preset"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:layout_marginEnd="@dimen/_5sdp"
+    android:background="@drawable/bg_music_preset_selected"
+    android:gravity="center"
+    android:paddingStart="@dimen/_15sdp"
+    android:paddingTop="@dimen/_5sdp"
+    android:paddingEnd="@dimen/_15sdp"
+    android:paddingBottom="@dimen/_5sdp"
+    android:text="@string/normal"
+    android:textColor="@color/white"
+    android:textSize="@dimen/_12sdp" />

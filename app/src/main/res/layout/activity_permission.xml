@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
+
+    <LinearLayout
+        android:id="@+id/linearTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:fontFamily="@font/sf_regular"
+            android:text="Required Permission"
+            android:textColor="#C0AFCB"
+            android:textSize="@dimen/_12ssp" />
+
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearTop">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="7dp"
+                        android:background="@drawable/bg_square_light">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:adjustViewBounds="true"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_storage_permission" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:text="Storage Permission"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppin_medium"
+                            android:text="Need Permission to open, edit, delete video &amp; Music files."
+                            android:textColor="@color/text_light"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnPermission1"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_setting_checked"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="7dp"
+                        android:background="@drawable/bg_square_light">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:adjustViewBounds="true"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_setting_permission" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:text="Write Setting"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppin_medium"
+                            android:text="Enable app permission allow access"
+                            android:textColor="@color/text_light"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/btnPermission2"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_setting_checked"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPermission"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/bg_main"
+                    android:fontFamily="@font/poppin_medium"
+                    android:includeFontPadding="false"
+                    android:text="Allow"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnNext"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/bg_main"
+                    android:fontFamily="@font/poppin_medium"
+                    android:text="Next"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent">-->
+
+        <!--                    <TextView-->
+        <!--                        android:id="@+id/tvHeader"-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_marginHorizontal="@dimen/_15sdp"-->
+        <!--                        android:layout_marginLeft="@dimen/_15sdp"-->
+        <!--                        android:layout_marginTop="@dimen/_10sdp"-->
+        <!--                        android:layout_marginRight="@dimen/_15sdp"-->
+        <!--                        android:fontFamily="@font/sf_regular"-->
+        <!--                        android:text="Storage permission is required to save the photos and videos from social media !!!"-->
+        <!--                        android:textColor="@color/black"-->
+        <!--                        android:textSize="@dimen/_12ssp"-->
+        <!--                        app:layout_constraintStart_toStartOf="parent"-->
+        <!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--                    <LinearLayout-->
+        <!--                        android:id="@+id/llStoragePermission"-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_marginLeft="@dimen/_12sdp"-->
+        <!--                        android:layout_marginTop="@dimen/_20sdp"-->
+        <!--                        android:layout_marginRight="@dimen/_12sdp"-->
+        <!--                        android:orientation="horizontal"-->
+        <!--                        app:layout_constraintTop_toBottomOf="@+id/tvHeader">-->
+
+        <!--                        <LinearLayout-->
+        <!--                            android:layout_width="wrap_content"-->
+        <!--                            android:layout_height="@dimen/_40sdp"-->
+        <!--                            android:layout_weight="1"-->
+        <!--                            android:background="@drawable/bg_border_shape"-->
+        <!--                            android:gravity="center"-->
+        <!--                            android:orientation="horizontal">-->
+
+        <!--                            <TextView-->
+        <!--                                android:layout_width="match_parent"-->
+        <!--                                android:layout_height="wrap_content"-->
+        <!--                                android:layout_weight="1"-->
+        <!--                                android:fontFamily="@font/sf_medium"-->
+        <!--                                android:gravity="center"-->
+        <!--                                android:text="External Storage"-->
+        <!--                                android:textColor="@color/black"-->
+        <!--                                android:textSize="@dimen/_13sdp" />-->
+
+        <!--                            <ImageView-->
+        <!--                                android:id="@+id/btnPermission1"-->
+        <!--                                android:layout_width="@dimen/_20sdp"-->
+        <!--                                android:layout_height="@dimen/_20sdp"-->
+        <!--                                android:layout_marginRight="@dimen/_10sdp"-->
+        <!--                                android:src="@drawable/ic_setting_checked"-->
+        <!--                                android:visibility="visible" />-->
+        <!--                        </LinearLayout>-->
+        <!--                    </LinearLayout>-->
+
+        <!--                    <LinearLayout-->
+        <!--                        android:id="@+id/llSettingPermission"-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="@dimen/_40sdp"-->
+        <!--                        android:layout_marginLeft="@dimen/_12sdp"-->
+        <!--                        android:layout_marginTop="@dimen/_15sdp"-->
+        <!--                        android:layout_marginRight="@dimen/_12sdp"-->
+        <!--                        android:orientation="horizontal"-->
+        <!--                        app:layout_constraintTop_toBottomOf="@+id/llStoragePermission">-->
+
+        <!--                        <LinearLayout-->
+        <!--                            android:layout_width="0dp"-->
+        <!--                            android:layout_height="match_parent"-->
+        <!--                            android:layout_weight="1"-->
+        <!--                            android:background="@drawable/bg_border_shape"-->
+        <!--                            android:gravity="center"-->
+        <!--                            android:orientation="horizontal">-->
+
+        <!--                            <TextView-->
+        <!--                                android:layout_width="match_parent"-->
+        <!--                                android:layout_height="wrap_content"-->
+        <!--                                android:layout_weight="1"-->
+        <!--                                android:fontFamily="@font/sf_medium"-->
+        <!--                                android:gravity="center"-->
+        <!--                                android:text="Write Setting"-->
+        <!--                                android:textColor="@color/black"-->
+        <!--                                android:textSize="@dimen/_13sdp" />-->
+
+        <!--                            <ImageView-->
+        <!--                                android:id="@+id/btnPermission2"-->
+        <!--                                android:layout_width="@dimen/_20sdp"-->
+        <!--                                android:layout_height="@dimen/_20sdp"-->
+        <!--                                android:layout_marginRight="@dimen/_10sdp"-->
+        <!--                                android:src="@drawable/ic_setting_checked"-->
+        <!--                                android:visibility="gone" />-->
+        <!--                        </LinearLayout>-->
+        <!--                    </LinearLayout>-->
+
+        <!--                    <LinearLayout-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_marginHorizontal="@dimen/_15sdp"-->
+        <!--                        android:layout_marginLeft="@dimen/_15sdp"-->
+        <!--                        android:layout_marginTop="@dimen/_10sdp"-->
+        <!--                        android:layout_marginRight="@dimen/_15sdp"-->
+        <!--                        android:layout_marginBottom="@dimen/_15sdp"-->
+        <!--                        android:orientation="horizontal"-->
+        <!--                        app:layout_constraintTop_toBottomOf="@+id/llSettingPermission">-->
+
+        <!--                        <Button-->
+        <!--                            android:id="@+id/btnPermission"-->
+        <!--                            android:layout_width="match_parent"-->
+        <!--                            android:layout_height="@dimen/_40sdp"-->
+        <!--                            android:background="@drawable/bg_main"-->
+        <!--                            android:fontFamily="@font/sf_semibold"-->
+        <!--                            android:includeFontPadding="false"-->
+        <!--                            android:text="Allow"-->
+        <!--                            android:textAllCaps="false"-->
+        <!--                            android:textColor="@color/black"-->
+        <!--                            android:textSize="@dimen/_16ssp" />-->
+
+        <!--                        <Button-->
+        <!--                            android:id="@+id/btnNext"-->
+        <!--                            android:layout_width="0dp"-->
+        <!--                            android:layout_height="@dimen/_40sdp"-->
+        <!--                            android:layout_weight="1"-->
+        <!--                            android:adjustViewBounds="true"-->
+        <!--                            android:background="@drawable/bg_main"-->
+        <!--                            android:fontFamily="@font/sf_bold"-->
+        <!--                            android:text="Next"-->
+        <!--                            android:textAllCaps="false"-->
+        <!--                            android:textColor="@color/black"-->
+        <!--                            android:textSize="@dimen/_16ssp"-->
+        <!--                            android:visibility="visible" />-->
+        <!--                    </LinearLayout>-->
+        <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

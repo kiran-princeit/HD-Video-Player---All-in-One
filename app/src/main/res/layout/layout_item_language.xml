@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="5dp"
+    android:background="@drawable/item_border_selector"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
+
+        <RadioButton
+            android:id="@+id/tvRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:theme="@style/RadioButtonStyle"
+            android:padding="6dp"
+            android:scaleX="-1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLanguageCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tvRadio"
+            android:fontFamily="@font/poppin_medium"
+            android:gravity="start|center"
+            android:padding="6dp"
+            android:text="en"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLanguages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="end"
+            android:layout_centerVertical="true"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="15dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="15dp"
+            android:text="@string/language"
+            android:textColor="#424242"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:aapt="http://schemas.android.com/aapt"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:id="@+id/ll_main"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_margin="@dimen/_5sdp"-->
+<!--    android:background="@drawable/d_lang"-->
+<!--    android:orientation="vertical">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imgIconFlag"-->
+<!--            android:layout_width="@dimen/_40sdp"-->
+<!--            android:layout_height="@dimen/_40sdp"-->
+<!--            android:layout_margin="@dimen/_10sdp"-->
+<!--            android:src="@drawable/f1" />-->
+
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_weight="1" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/rbCheck"-->
+<!--            android:layout_width="@dimen/_30sdp"-->
+<!--            android:layout_height="@dimen/_30sdp"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_margin="@dimen/_10sdp"-->
+<!--            android:padding="@dimen/_5sdp"-->
+<!--            android:src="@drawable/u_item" />-->
+<!--    </LinearLayout>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txtNameCountry"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="@dimen/_10sdp"-->
+<!--        android:layout_marginLeft="@dimen/_10sdp"-->
+<!--        android:layout_marginRight="@dimen/_10sdp"-->
+<!--        android:layout_marginBottom="@dimen/_10sdp"-->
+<!--        android:fontFamily="@font/sf_medium"-->
+<!--        android:text="India"-->
+<!--        android:textColor="#181974"-->
+<!--        android:textSize="@dimen/_14sdp" />-->
+<!--</LinearLayout>-->

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/view_click"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout" />
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_bottom_sheet_dialog"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="43dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center"
+            android:background="@drawable/divider_dialog" />
+
+        <RelativeLayout
+            android:id="@+id/equalizerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_180sdp"
+                android:layout_toStartOf="@+id/layout2">
+
+                <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/textView1"
+                    android:layout_marginTop="@dimen/_4sdp">
+
+                    <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBar
+                        android:id="@+id/seekBar1"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:max="100"
+                        android:maxHeight="@dimen/_5sdp"
+                        android:minHeight="@dimen/_5sdp"
+                        android:progressDrawable="@drawable/seekbar_style_2"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/thumb"
+                        app:seekBarRotation="CW270" />
+                </hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper>
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="60 Hz"
+                    android:textColor="@color/color_787D85"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout2"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_180sdp"
+                android:layout_toStartOf="@+id/layout3">
+
+                <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/textView2"
+                    android:layout_marginTop="@dimen/_4sdp">
+
+                    <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBar
+                        android:id="@+id/seekBar2"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:max="100"
+                        android:maxHeight="@dimen/_5sdp"
+                        android:minHeight="@dimen/_5sdp"
+                        android:progressDrawable="@drawable/seekbar_style_2"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/thumb"
+                        app:seekBarRotation="CW270" />
+                </hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="230 Hz"
+                    android:textColor="@color/color_787D85"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout3"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_180sdp"
+                android:layout_centerInParent="true">
+
+                <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/textView3"
+                    android:layout_marginTop="@dimen/_4sdp">
+
+                    <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBar
+                        android:id="@+id/seekBar3"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:max="100"
+                        android:maxHeight="@dimen/_5sdp"
+                        android:minHeight="@dimen/_5sdp"
+                        android:progressDrawable="@drawable/seekbar_style_2"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/thumb"
+                        app:seekBarRotation="CW270" />
+                </hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="910 Hz"
+                    android:textColor="@color/color_787D85"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout4"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_180sdp"
+                android:layout_toEndOf="@+id/layout3">
+
+                <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/textView4"
+                    android:layout_marginTop="@dimen/_4sdp">
+
+                    <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBar
+                        android:id="@+id/seekBar4"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:max="100"
+                        android:maxHeight="@dimen/_5sdp"
+                        android:minHeight="@dimen/_5sdp"
+                        android:progressDrawable="@drawable/seekbar_style_2"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/thumb"
+                        app:seekBarRotation="CW270" />
+                </hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper>
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="3.6 KHz"
+                    android:textColor="@color/color_787D85"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_180sdp"
+                android:layout_toEndOf="@+id/layout4">
+
+                <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/textView5"
+                    android:layout_marginTop="@dimen/_4sdp">
+
+                    <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBar
+                        android:id="@+id/seekBar5"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:max="100"
+                        android:maxHeight="@dimen/_5sdp"
+                        android:minHeight="@dimen/_5sdp"
+                        android:progressDrawable="@drawable/seekbar_style_2"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/thumb"
+                        app:seekBarRotation="CW270" />
+                </hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper>
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="14 KHz"
+                    android:textColor="@color/color_787D85"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_preset_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:text="Bass Booster"
+            android:textColor="@color/color_787D85" />
+
+        <SeekBar
+            android:id="@+id/sb_bass_booster"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:max="20"
+            android:progress="1"
+            android:progressDrawable="@drawable/seekbar_style_2"
+            android:thumb="@drawable/thumb" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:text="Virtualizer"
+            android:textColor="@color/color_787D85" />
+
+        <SeekBar
+            android:id="@+id/sb_virtualizer"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:max="18"
+            android:progress="1"
+            android:progressDrawable="@drawable/seekbar_style_2"
+            android:thumb="@drawable/thumb" />
+    </LinearLayout>
+</RelativeLayout>

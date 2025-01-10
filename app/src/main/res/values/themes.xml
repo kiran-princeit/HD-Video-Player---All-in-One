@@ -1,0 +1,210 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <!--    <style name="Base.Theme.HDVideoPlayerAllInOne" parent="Theme.Material3.DayNight.NoActionBar">-->
+<!--    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">-->
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:statusBarColor">@color/black</item>
+<!--        <item name="android:navigationBarColor">@android:color/transparent</item>-->
+        <item name="colorPrimary">@color/dark_purple</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryVariant">@color/dark_purple</item>
+        <item name="colorSecondary">@color/dark_purple</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlActivated">@color/rating</item>
+    </style>
+    <style name="Base.Theme.HDVideoPlayerAllInOne" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    </style>
+
+
+    <style name="Theme.HDVideoPlayerAllInOne" parent="Base.Theme.HDVideoPlayerAllInOne" />
+
+    <style name="SearchViewStyle">
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:editTextColor">@color/black</item>
+    </style>
+    <style name="RatingBar_Wall" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlActivated">@color/rating</item>
+    </style>
+
+    <style name="SearchWebViewStyle">
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:editTextColor">@color/white</item>
+        <item name="closeIcon">@null</item>
+        <item name="defaultQueryHint">@string/type_in_your_search</item>
+        <item name="queryHint">@string/type_in_your_search</item>
+        <item name="searchHintIcon">@null</item>
+    </style>
+
+    <style name="CustomDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle">
+        <item name="android:background">@drawable/layout_bg</item>
+    </style>
+
+
+    <style name="NumberPickerStyle">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="YTOSecondsTextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TrackSelectionDialogThemeOverlay" parent="Theme.AppCompat.Dialog">
+        <item name="windowNoTitle">false</item>
+    </style>
+
+    <style name="TabTextStyle">
+        <item name="android:textAllCaps">false</item> <!-- Ensure no capitalization -->
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/poppin_medium</item>
+    </style>
+
+    <style name="RadioButtonStyle" parent="AppTheme">
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorAccent">@color/dark_purple</item>
+    </style>
+
+
+
+    <style name="SeekBarColor"
+        parent="Widget.AppCompat.SeekBar">
+        <item name="colorAccent">@color/dark_purple</item>
+    </style>
+
+    <style name="FullScreenDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+
+
+    <style name="Theme.HDVideoPlayerAllInOne.Nine">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_9</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Nineteen">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_19</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.One">
+        <item name="backgroundColor">@color/color_background_music</item>
+        <item name="colorAccent">@color/color_1696F3</item>
+        <item name="color_home">@color/black</item>
+        <item name="color_theme">@color/color_1696F3</item>
+        <item name="dialogTheme">@color/color_dialog</item>
+        <item name="tabBackground">@color/color_bg_tab_dark</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Seven">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_7</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Seventeen">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_17</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Six">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_6</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Sixteen">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_16</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Ten">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_10</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Thirteen">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_13</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Three">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_3</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Twelve">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_12</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Two">
+        <item name="colorAccent">@color/color_1696F3</item>
+        <item name="color_home">@color/white</item>
+        <item name="color_theme">@color/color_1696F3</item>
+        <item name="dialogTheme">@color/color_dialog_light</item>
+        <item name="tabBackground">@color/color_bg_tab_light</item>
+    </style>
+
+
+    <style name="Theme.HDVideoPlayerAllInOne.Eight">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_8</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Eighteen">
+        <item name="backgroundColor">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_18</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Eleven">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_11</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Fifteen">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_15</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Five">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_5</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Four">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_4</item>
+    </style>
+
+    <style name="Theme.HDVideoPlayerAllInOne.Fourteen">
+        <item name="color_home">@color/transparent</item>
+        <item name="color_theme">@color/color_theme_14</item>
+    </style>
+
+</resources>

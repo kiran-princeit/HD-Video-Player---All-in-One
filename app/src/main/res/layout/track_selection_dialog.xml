@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/track_selection_dialog_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/track_selection_dialog_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="start"
+            app:tabMode="fixed" />
+    </androidx.viewpager.widget.ViewPager>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/track_selection_dialog_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_ripple_click"
+            android:fontFamily="@font/sf_medium"
+            android:padding="10dp"
+            android:text="@string/cancel"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_dialog_ok"
+            app:layout_constraintTop_toBottomOf="@+id/rg_sort" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/track_selection_dialog_ok_button"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="15dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/bg_main"
+            android:fontFamily="@font/poppin_medium"
+            android:text="@string/ok"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rg_sort" />
+
+        <!--        <Button-->
+        <!--            android:id="@+id/track_selection_dialog_cancel_button"-->
+        <!--            style="?android:attr/borderlessButtonStyle"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="@android:string/cancel"-->
+        <!--            android:textColor="@color/black" />-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/track_selection_dialog_ok_button"-->
+        <!--            style="?android:attr/borderlessButtonStyle"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="@android:string/ok"-->
+        <!--            android:textColor="@color/black" />-->
+    </LinearLayout>
+</LinearLayout>

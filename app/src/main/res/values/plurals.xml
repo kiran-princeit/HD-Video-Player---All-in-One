@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="al_exo_controls_fastforward_by_amount_description">
+        <item quantity="one">Fast forward %d second</item>
+        <item quantity="other">Fast forward %d seconds</item>
+    </plurals>
+    <plurals name="al_exo_controls_rewind_by_amount_description">
+        <item quantity="one">Rewind %d second</item>
+        <item quantity="other">Rewind %d seconds</item>
+    </plurals>
+    <plurals name="exo_controls_fastforward_by_amount_description">
+        <item quantity="one">Fast forward %d second</item>
+        <item quantity="other">Fast forward %d seconds</item>
+    </plurals>
+    <plurals name="exo_controls_rewind_by_amount_description">
+        <item quantity="one">Rewind %d second</item>
+        <item quantity="other">Rewind %d seconds</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="one">%d new notification</item>
+        <item quantity="other">%d new notifications</item>
+    </plurals>
+    <plurals name="quick_seek_x_second">
+        <item quantity="one">%d second</item>
+        <item quantity="many">%d seconds</item>
+        <item quantity="other">%d seconds</item>
+    </plurals>
+    <plurals name="value_of_album_info">
+        <item quantity="one">%d . %d song . %d min</item>
+        <item quantity="other">%d . %d songs . %d min</item>
+    </plurals>
+    <plurals name="value_of_album_info_2">
+        <item quantity="one">%d song . %d min</item>
+        <item quantity="other">%d songs . %d min</item>
+    </plurals>
+    <plurals name="value_of_music">
+        <item quantity="one">%d Music</item>
+        <item quantity="other">%d Musics</item>
+    </plurals>
+    <plurals name="value_of_track">
+        <item quantity="one">%d Song</item>
+        <item quantity="other">%d Songs</item>
+    </plurals>
+    <plurals name="value_of_video">
+        <item quantity="one">%d Video</item>
+        <item quantity="other">%d Videos</item>
+    </plurals>
+</resources>

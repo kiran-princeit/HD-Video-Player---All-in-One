@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/exo_play_speed"
+        android:title="Speed" />
+    <item
+        android:id="@+id/exo_fullscreen"
+        android:title="Rotate" />
+    <item
+        android:id="@+id/exo_track_selection"
+        android:title="Tracks" />
+</menu>

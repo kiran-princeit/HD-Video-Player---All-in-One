@@ -1,0 +1,122 @@
+package hd.video.player.videoplayer.mplayer.masterplayer.fragments.music;
+
+import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.provider.MediaStore.Audio.Albums;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
+import androidx.recyclerview.widget.SimpleItemAnimator;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
+
+import hd.video.player.videoplayer.mplayer.masterplayer.R;
+import hd.video.player.videoplayer.mplayer.masterplayer.adapters.music.MusicAlbumAdapter;
+import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicAlbum;
+import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicInfo;
+import hd.video.player.videoplayer.mplayer.masterplayer.data.repository.MusicDataRepository;
+import hd.video.player.videoplayer.mplayer.masterplayer.fragments.BaseFragment;
+import hd.video.player.videoplayer.mplayer.masterplayer.presenter.music.MusicAlbumPresenter;
+import hd.video.player.videoplayer.mplayer.masterplayer.util.FirebaseAnalyticsUtils;
+import hd.video.player.videoplayer.mplayer.masterplayer.view.music.MusicAlbumView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MusicAlbumFragment extends BaseFragment<MusicAlbumPresenter> implements MusicAlbumView, MusicAlbumAdapter.AlbumClickListener {
+    private final ContentObserver contentObserver = new ContentObserver(new Handler()) {
+        public void onChange(boolean z, Uri uri) {
+            if (MusicAlbumFragment.this.mPresenter != null) {
+                ((MusicAlbumPresenter) MusicAlbumFragment.this.mPresenter).loadMusicAlbumList();
+            }
+        }
+    };
+    private ProgressBar loading;
+    private MusicAlbumAdapter mAdapter;
+    private Context mContext;
+    private SwipeRefreshLayout refreshLayout;
+    private TextView tvTotal;
+
+    public void onAlbumOptionSelect(MusicAlbum musicAlbum, int i, int i2) {
+    }
+
+    public void onUpdateMusicList(List<MusicInfo> list) {
+    }
+
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mContext = context;
+    }
+
+    public MusicAlbumPresenter createPresenter() {
+        return new MusicAlbumPresenter(this.mContext, this, new MusicDataRepository(requireActivity()));
+    }
+
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
+        View inflate = layoutInflater.inflate(R.layout.fragment_music_main, viewGroup, false);
+        RecyclerView recyclerView = (RecyclerView) inflate.findViewById(R.id.rv_content_tab);
+        this.refreshLayout = (SwipeRefreshLayout) inflate.findViewById(R.id.swipe_refresh);
+        this.tvTotal = (TextView) inflate.findViewById(R.id.tv_total);
+        this.loading = (ProgressBar) inflate.findViewById(R.id.loading);
+        inflate.findViewById(R.id.iv_sort).setVisibility(4);
+        this.mAdapter = new MusicAlbumAdapter(this.mContext, new ArrayList(), this);
+        LinearLayoutManager gridLayoutManager = new LinearLayoutManager(this.mContext);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(this.mAdapter);
+        ItemAnimator itemAnimator = recyclerView.getItemAnimator();
+        if (itemAnimator instanceof SimpleItemAnimator) {
+            ((SimpleItemAnimator) itemAnimator).setSupportsChangeAnimations(false);
+        }
+        this.refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            public final void onRefresh() {
+                MusicAlbumFragment.this.m676x7aa8db4c();
+            }
+        });
+        return inflate;
+    }
+
+    public void m676x7aa8db4c() {
+        if (this.mPresenter != null) {
+            ((MusicAlbumPresenter) this.mPresenter).loadMusicAlbumList();
+        }
+    }
+
+    public void onResume() {
+        super.onResume();
+        if (this.mPresenter != null) {
+            ((MusicAlbumPresenter) this.mPresenter).loadMusicAlbumList();
+        }
+        FirebaseAnalyticsUtils.putScreenChecking(this.mContext, "Music_Album_Tab");
+        requireActivity().getContentResolver().registerContentObserver(Albums.EXTERNAL_CONTENT_URI, true, this.contentObserver);
+    }
+
+    public void onPause() {
+        super.onPause();
+        requireActivity().getContentResolver().unregisterContentObserver(this.contentObserver);
+    }
+
+    public void onAlbumClick(int i, MusicAlbum musicAlbum) {
+        MusicAlbumDialogFragment.newInstance(musicAlbum, new MusicAlbumDialogFragment.Callback() {
+        }).show(getChildFragmentManager().beginTransaction(), "dialog_music_album");
+    }
+
+    public void onUpdateAlbum(List<MusicAlbum> list) {
+        this.loading.setVisibility(8);
+        this.refreshLayout.setVisibility(0);
+        this.refreshLayout.setRefreshing(false);
+        this.tvTotal.setText(getString(R.string.all_album, Integer.valueOf(list.size())));
+        MusicAlbumAdapter musicAlbumAdapter = this.mAdapter;
+        if (musicAlbumAdapter != null) {
+            musicAlbumAdapter.updateAlbumList(list);
+        }
+    }
+}

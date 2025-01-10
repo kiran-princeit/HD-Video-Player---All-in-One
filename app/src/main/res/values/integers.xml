@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="exo_media_button_opacity_percentage_disabled">33</integer>
+    <integer name="exo_media_button_opacity_percentage_enabled">100</integer>
+</resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10ssp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppin_medium"
+            android:text="Language"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+        <ImageView
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:fontFamily="@font/sf_bold"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_2sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_2sdp"
+            android:src="@drawable/ic_done" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/languageRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/nativeFrameLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+
+    <!--        <com.adsnative.myadslib.ads.MediumNativeAdsView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content" />-->
+    <!--    </FrameLayout>-->
+</LinearLayout>
