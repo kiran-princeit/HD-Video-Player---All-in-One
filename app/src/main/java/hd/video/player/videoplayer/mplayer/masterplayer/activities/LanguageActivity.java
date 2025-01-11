@@ -26,6 +26,7 @@ public final class LanguageActivity extends BaseActivity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_language);
+
         List<Language> languages = new ArrayList<>();
         languages.add(new Language("en", "English"));
         languages.add(new Language("es", "Spanish"));

@@ -180,4 +180,13 @@
     <string name="yes_i_like">हां, मुझे पसंद है</string>
     <string name="let_us_know_and_help_us_improve_the_experiance_n_for_users_just_like_you">हमें बताएं और हमें उपयोगकर्ताओं के अनुभव को बेहतर बनाने में मदद करें\nजैसे आप!</string>
 
+
+    <string name="brightness">चमक</string>
+    <string name="you_haven_t_created_any_playlist">आपने कोई प्लेलिस्ट नहीं बनाई है</string>
+    <string name="allow">अनुमति दें</string>
+    <string name="no_internet" translatable="false">कोई इंटरनेट कनेक्शन नहीं मिला। अपने कनेक्शन की जांच करें या फिर से प्रयास करें।</string>
+    <string name="try_again">फिर से प्रयास करें</string>
+    <string name="music_player">संगीत प्लेयर</string>
+    <string name="video_player">एचडी वीडियो प्लेयर</string>
+
 </resources>

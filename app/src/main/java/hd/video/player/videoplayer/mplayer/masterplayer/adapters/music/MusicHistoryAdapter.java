@@ -7,14 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView.Adapter;
+
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.C;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import hd.video.player.videoplayer.mplayer.masterplayer.R;
 import hd.video.player.videoplayer.mplayer.masterplayer.activities.PlayMusicActivity;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.BottomMenuAdapter;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicHistory;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicInfo;
 import hd.video.player.videoplayer.mplayer.masterplayer.dialog.BottomMenuDialogControl;
@@ -32,12 +37,6 @@ public class MusicHistoryAdapter extends Adapter<androidx.recyclerview.widget.Re
 
     public interface Callback {
         void onMusicOptionSelected(MusicHistory musicHistory, int position, int optionId);
-    }
-
-    public static class EmptyViewHolder extends androidx.recyclerview.widget.RecyclerView.ViewHolder {
-        public EmptyViewHolder(View view) {
-            super(view);
-        }
     }
 
     public static class MusicViewHolder extends androidx.recyclerview.widget.RecyclerView.ViewHolder {
@@ -68,35 +67,33 @@ public class MusicHistoryAdapter extends Adapter<androidx.recyclerview.widget.Re
 
     @Override
     public androidx.recyclerview.widget.RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType != -1) {
-            return new MusicViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_music_info, parent, false));
-        }
-        View emptyView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empty_data, parent, false);
-        ((TextView) emptyView.findViewById(R.id.tv_history)).setText(R.string.no_song_listened);
-        return new EmptyViewHolder(emptyView);
+        return new MusicViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_music_info, parent, false));
     }
 
     @Override
     public void onBindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder holder, final int position) {
-        if (holder.getItemViewType() != -1) {
-            MusicViewHolder musicViewHolder = (MusicViewHolder) holder;
-            final MusicHistory musicHistory = mMusicHistoryList.get(position);
-            MusicInfo musicInfo = musicHistory.getMusics();
+        MusicViewHolder musicViewHolder = (MusicViewHolder) holder;
+        final MusicHistory musicHistory = mMusicHistoryList.get(position);
+        MusicInfo musicInfo = musicHistory.getMusics();
 
-            musicViewHolder.tvSongTitle.setText(musicInfo.getDisplayName());
-            musicViewHolder.tvArtistName.setText(musicInfo.getArtist());
-            musicViewHolder.tvSongDuration.setText(Utility.convertLongToDuration(musicInfo.getDuration()));
+        musicViewHolder.tvSongTitle.setText(musicInfo.getDisplayName());
+        musicViewHolder.tvArtistName.setText(musicInfo.getArtist());
+        musicViewHolder.tvSongDuration.setText(Utility.convertLongToDuration(musicInfo.getDuration()));
 
-            Glide.with(mActivity)
-                    .load(MusicPlayerUtils.getThumbnailOfSong(mActivity, musicInfo.getPath(), 60))
-                    .placeholder(R.drawable.ic_music_icon)
-                    .centerCrop()
-                    .error(R.drawable.ic_music_icon)
-                    .into(musicViewHolder.ivThumbnail);
+        Glide.with(mActivity)
+                .load(MusicPlayerUtils.getThumbnailOfSong(mActivity, musicInfo.getPath(), 60))
+                .placeholder(R.drawable.ic_music_icon)
+                .centerCrop()
+                .error(R.drawable.ic_music_icon)
+                .into(musicViewHolder.ivThumbnail);
 
-            musicViewHolder.itemView.setOnClickListener(view -> navigateToMusicPlayer(position, view));
-            musicViewHolder.ivOptions.setOnClickListener(view -> showOptionsMenu(musicHistory, position, view));
-        }
+        musicViewHolder.itemView.setOnClickListener(view ->
+                AdManager.showInterstitial(mActivity, () -> {
+                    navigateToMusicPlayer(position, view);
+                })
+        );
+
+        musicViewHolder.ivOptions.setOnClickListener(view -> showOptionsMenu(musicHistory, position, view));
     }
 
     private void navigateToMusicPlayer(int position, View view) {
@@ -117,16 +114,11 @@ public class MusicHistoryAdapter extends Adapter<androidx.recyclerview.widget.Re
         });
         FirebaseAnalyticsUtils.putEventClick(mActivity, FirebaseAnalyticsUtils.EVENT_PROX_MUSIC_HISTORY, "click_more_music_history");
     }
-
-    @Override
-    public int getItemViewType(int position) {
-        return (mMusicHistoryList == null || mMusicHistoryList.isEmpty()) ? -1 : 0;
-    }
-
     @Override
     public int getItemCount() {
-        return (mMusicHistoryList == null || mMusicHistoryList.isEmpty()) ? 1 : mMusicHistoryList.size();
+        return (mMusicHistoryList == null || mMusicHistoryList.isEmpty()) ? 0 : mMusicHistoryList.size();
     }
+
 
     public void removeItemAtPosition(int position) {
         mMusicHistoryList.remove(position);
@@ -141,10 +133,5 @@ public class MusicHistoryAdapter extends Adapter<androidx.recyclerview.widget.Re
         for (MusicHistory musicHistory : mMusicHistoryList) {
             mMusicIdList.add(musicHistory.getId());
         }
-    }
-
-        public void removeAllItems() {
-        this.mMusicHistoryList = new ArrayList();
-        notifyDataSetChanged();
     }
 }

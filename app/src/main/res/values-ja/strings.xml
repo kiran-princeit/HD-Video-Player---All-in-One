@@ -179,4 +179,12 @@
     <string name="yes_i_like">はい、気に入りました</string>
     <string name="let_us_know_and_help_us_improve_the_experiance_n_for_users_just_like_you">ご意見をお聞かせいただき、あなたのようなユーザーのために体験を改善する手助けをしてください。</string>
 
+    <string name="brightness">明るさ</string>
+    <string name="you_haven_t_created_any_playlist">プレイリストを作成していません</string>
+    <string name="allow">許可</string>
+    <string name="no_internet" translatable="false">インターネット接続が見つかりません。接続を確認するか、もう一度お試しください。</string>
+    <string name="try_again">もう一度試す</string>
+    <string name="music_player">ミュージックプレーヤー</string>
+    <string name="video_player">HDビデオプレーヤー</string>
+
 </resources>

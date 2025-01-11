@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ public class HistoryFragment extends Fragment {
     private ProgressBar loading;
     private SwipeRefreshLayout refreshLayout;
     private TextView tvTotal;
+    ImageView iv_empty;
 
     @Override
     public void onAttach(Context context) {
@@ -56,6 +58,7 @@ public class HistoryFragment extends Fragment {
         refreshLayout = view.findViewById(R.id.swipe_refresh);
         loading = view.findViewById(R.id.loading);
         tvTotal = view.findViewById(R.id.tv_total_video);
+        iv_empty = view.findViewById(R.id.iv_empty);
         view.findViewById(R.id.iv_delete).setOnClickListener(v -> onDeleteClick());
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         adapter = new VideoHistoryAdapter(getActivity(), mHistories, new VideoHistoryAdapter.Callback() {
@@ -83,6 +86,14 @@ public class HistoryFragment extends Fragment {
             loadHistoryData();
         });
     }
+
+    /*
+    * Report
+    * -VideoPlayer
+    *  -Convert Fragments to Activity of MusicPlayer And videoPLayer
+    *
+    *
+    * */
 
 
     @Override
@@ -125,6 +136,14 @@ public class HistoryFragment extends Fragment {
         refreshLayout.setRefreshing(false);
         tvTotal.setText(getString(R.string.all_history, videos.size()));
         adapter.updateHistory(videos);
+
+        if (videos == null || videos.isEmpty()) {
+            iv_empty.setVisibility(View.VISIBLE);
+            refreshLayout.setVisibility(View.GONE);
+        } else {
+            iv_empty.setVisibility(View.GONE);
+            refreshLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     public void onHistoryOptionSelect(VideoHistory videoHistory, int option, int position) {

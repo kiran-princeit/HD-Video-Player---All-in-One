@@ -41,12 +41,14 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.jsoup.Jsoup;
 
 import hd.video.player.videoplayer.mplayer.masterplayer.BuildConfig;
 import hd.video.player.videoplayer.mplayer.masterplayer.R;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicInfo;
 import hd.video.player.videoplayer.mplayer.masterplayer.fragments.SettingFragment;
 import hd.video.player.videoplayer.mplayer.masterplayer.fragments.music.MusicManagerFragment;
@@ -138,14 +140,17 @@ public class MainActivity extends BaseActivity implements ServiceConnection {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_main);
-        boolean z = false;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!(Settings.System.canWrite(this) && PermissionUtils.checkStoragePermission(this))) {
-                startActivity(new Intent(this, PermissionActivity.class));
-            }
-        }
+
+        RelativeLayout adContainerBanner = findViewById(R.id.adContainerBanner);
+        ShimmerFrameLayout shimmerContainerBanner = findViewById(R.id.shimmer_container_banner);
+        AdManager.showBanner(adContainerBanner, shimmerContainerBanner, MainActivity.this);
 
 
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (!(Settings.System.canWrite(this) && PermissionUtils.checkStoragePermission(this))) {
+//                startActivity(new Intent(this, PermissionActivity.class));
+//            }
+//        }
         switchToFragment1(new VideoManagerFragment());
         findViewById(R.id.rl_title).setVisibility(8);
         this.tv_music = (TextView) findViewById(R.id.tv_music);
@@ -157,8 +162,8 @@ public class MainActivity extends BaseActivity implements ServiceConnection {
         findViewById(R.id.ll_video).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((TextView) findViewById(R.id.title)).setText(R.string.video);
                 findViewById(R.id.rl_title).setVisibility(8);
-//ADS
                 switchToFragment1(new VideoManagerFragment());
                 ((ImageView) findViewById(R.id.video)).setImageResource(R.drawable.b_videos);
                 ((ImageView) findViewById(R.id.music)).setImageResource(R.drawable.u_music);
@@ -169,7 +174,7 @@ public class MainActivity extends BaseActivity implements ServiceConnection {
         findViewById(R.id.ll_music).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((TextView) findViewById(R.id.title)).setText(R.string.app_name);
+                ((TextView) findViewById(R.id.title)).setText(R.string.music_player);
                 findViewById(R.id.rl_title).setVisibility(0);
                 switchToFragment1(new MusicManagerFragment());
                 MainActivity.this.setTextColor(tv_music, tv_video, tv_setting);
@@ -182,7 +187,7 @@ public class MainActivity extends BaseActivity implements ServiceConnection {
             @Override
             public void onClick(View view) {
                 findViewById(R.id.rl_title).setVisibility(0);
-                ((TextView) findViewById(R.id.title)).setText("Settings");
+                ((TextView) findViewById(R.id.title)).setText(R.string.setting);
                 switchToFragment1(new SettingFragment());
                 ((ImageView) findViewById(R.id.video)).setImageResource(R.drawable.u_videos);
                 ((ImageView) findViewById(R.id.music)).setImageResource(R.drawable.u_music);
@@ -263,6 +268,10 @@ public class MainActivity extends BaseActivity implements ServiceConnection {
         infodialog.setCancelable(false);
         AppCompatButton tv_ok = dialogView.findViewById(R.id.tv_dialog_ok);
         TextView tv_cancel = dialogView.findViewById(R.id.tv_dialog_cancel);
+
+        RelativeLayout adContainerBanner = dialogView.findViewById(R.id.adContainerBannerExit);
+        ShimmerFrameLayout shimmerFrameLayout = dialogView.findViewById(R.id.shimmer_container_banner_exit);
+        AdManager.showNativeBig(adContainerBanner, shimmerFrameLayout, MainActivity.this);
 
         tv_ok.setOnClickListener(view -> {
             finishAffinity();

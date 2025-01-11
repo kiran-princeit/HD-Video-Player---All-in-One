@@ -19,6 +19,8 @@ import com.google.android.exoplayer2.C;
 
 import hd.video.player.videoplayer.mplayer.masterplayer.R;
 import hd.video.player.videoplayer.mplayer.masterplayer.activities.PlayMusicActivity;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.OnActivityResultLauncher1;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.database.MyDatabase;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicInfo;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicPlaylist;
@@ -148,21 +150,25 @@ public class MusicAdapter extends Adapter<MusicAdapter.ViewHolder> {
         viewHolder.itemView.setOnClickListener(new OnClickListener() {
             @SuppressLint("WrongConstant")
             public final void onClick(View view) {
-
                 if (!MusicAdapter.this.mIsSelectMusicMode || MusicAdapter.this.mMusicPlaylist == null) {
-                    Intent intent = new Intent(view.getContext(), PlayMusicActivity.class);
-                    intent.putExtra(AppConstant.IntentExtra.EXTRA_MUSIC_NUMBER, i);
-                    intent.putExtra(AppConstant.IntentExtra.EXTRA_MUSIC_ARRAY, (ArrayList) getAllMusicId());
-                    intent.addFlags(C.ENCODING_PCM_32BIT);
-                    activity.startActivity(intent);
-                    return;
+                    AdManager.showInterstitial(activity, new OnActivityResultLauncher1.OnActivityResultLauncher2() {
+                        @Override
+                        public void onLauncher() {
+                            // Create an Intent to start PlayMusicActivity
+                            Intent intent = new Intent(activity, PlayMusicActivity.class);
+                            intent.putExtra(AppConstant.IntentExtra.EXTRA_MUSIC_NUMBER, i);
+                            intent.putExtra(AppConstant.IntentExtra.EXTRA_MUSIC_ARRAY, (ArrayList) getAllMusicId());
+                            // It's better to check if this flag is appropriate for the context
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            activity.startActivity(intent);
+
+                        }
+                    });
                 } else {
                     // Toggle the selection state of the item (checked or unchecked).
                     final boolean isActivated = myViewHolder.ivChecked.isActivated();
                     myViewHolder.ivChecked.setActivated(!isActivated); // Toggling the activation state
                     final long dateAdded = mMusicPlaylist.getDateAdded(); // Get the playlist's date added
-
-                    // Run the update on the database thread for adding/removing from playlist.
                     ThreadExecutor.runOnDatabaseThread(new Runnable() {
                         public final void run() {
                             getmusicSelected(!isActivated, musicInfo, dateAdded); // Adding/removing the music
@@ -175,6 +181,7 @@ public class MusicAdapter extends Adapter<MusicAdapter.ViewHolder> {
         });
 
     }
+
     private List<Long> getAllMusicId() {
         ArrayList arrayList = new ArrayList();
         List<MusicInfo> list = this.mMusics;

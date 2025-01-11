@@ -1,14 +1,20 @@
 package hd.video.player.videoplayer.mplayer.masterplayer.adapters.music;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView.Adapter;
+
 import java.util.Collections;
 import java.util.List;
+
 import hd.video.player.videoplayer.mplayer.masterplayer.R;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicArtist;
 
 public class ArtistListAdapter extends Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder> {
@@ -45,24 +51,27 @@ public class ArtistListAdapter extends Adapter<androidx.recyclerview.widget.Recy
 
     @Override
     public androidx.recyclerview.widget.RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType != -1) {
-            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_music_artist, parent, false));
-        }
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empty_data, parent, false);
-        ((TextView) view.findViewById(R.id.tv_history)).setText(R.string.no_artists);
-        return new EmptyViewHolder(view);
+//        if (viewType != -1) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_music_artist, parent, false));
+//        }
+//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empty_data, parent, false);
+//        return new EmptyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(androidx.recyclerview.widget.RecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType() != -1) {
-            ViewHolder viewHolder = (ViewHolder) holder;
-            final MusicArtist artist = mArtistList.get(position);
-            viewHolder.artistNameTextView.setText(artist.getArtistName());
-            int trackCount = artist.getMusicList().size();
-            viewHolder.trackCountTextView.setText(mContext.getResources().getQuantityString(R.plurals.value_of_track, trackCount, trackCount));
-            viewHolder.itemView.setOnClickListener(v -> onArtistClick(artist, v));
-        }
+//        if (holder.getItemViewType() != -1) {
+        ViewHolder viewHolder = (ViewHolder) holder;
+        final MusicArtist artist = mArtistList.get(position);
+        viewHolder.artistNameTextView.setText(artist.getArtistName());
+        int trackCount = artist.getMusicList().size();
+        viewHolder.trackCountTextView.setText(mContext.getResources().getQuantityString(R.plurals.value_of_track, trackCount, trackCount));
+        viewHolder.itemView.setOnClickListener(v ->
+                AdManager.showInterstitial((Activity) mContext, () -> {
+                    onArtistClick(artist, v);
+                })
+        );
+//        }
     }
 
     private void onArtistClick(MusicArtist musicArtist, View view) {

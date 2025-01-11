@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import hd.video.player.videoplayer.mplayer.masterplayer.dialog.SortDialogBuilder
 import hd.video.player.videoplayer.mplayer.masterplayer.fragments.BaseDialogFragment;
 import hd.video.player.videoplayer.mplayer.masterplayer.presenter.music.MusicMainPresenter;
 
+import hd.video.player.videoplayer.mplayer.masterplayer.util.constant.AppConstant;
 import hd.video.player.videoplayer.mplayer.masterplayer.view.music.MusicInfoView;
 
 public class AddMusicPlaylistDialogFragment extends BaseDialogFragment<MusicMainPresenter> implements MusicInfoView, MusicAdapter.Callback {
@@ -72,7 +74,7 @@ public class AddMusicPlaylistDialogFragment extends BaseDialogFragment<MusicMain
 
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-
+        setStyle(0, AppConstant.Themes.THEMES_STYLE[new SettingPreferences(this.mContext).getThemes()]);
     }
 
     public Dialog onCreateDialog(Bundle bundle) {
@@ -88,6 +90,7 @@ public class AddMusicPlaylistDialogFragment extends BaseDialogFragment<MusicMain
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
         View inflate = layoutInflater.inflate(R.layout.dialog_fragment_playlist_video, viewGroup, false);
+
         ImageView imageView = (ImageView) inflate.findViewById(R.id.iv_done);
         this.ivDone = imageView;
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +128,7 @@ public class AddMusicPlaylistDialogFragment extends BaseDialogFragment<MusicMain
         this.ivViewMode.setVisibility(8);
         this.ivSearch.setVisibility(4);
         this.ivDone.setVisibility(0);
-        this.rvMusic.setLayoutManager(new NpaGridLayoutManager(this.mContext,2));
+        this.rvMusic.setLayoutManager(new LinearLayoutManager(this.mContext));
         this.mAdapter = new MusicAdapter(requireActivity(), true, this,mPlaylist);
         this.rvMusic.setAdapter(this.mAdapter);
         Log.e("AddMusicPlaylistDialogFragment", "onCreateView: " + mMusics.size());

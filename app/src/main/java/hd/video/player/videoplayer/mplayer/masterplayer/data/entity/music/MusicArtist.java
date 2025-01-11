@@ -1,9 +1,10 @@
 package hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MusicArtist {
+public class MusicArtist implements Serializable {
     private long artistId;
     private String artistName;
     private List<MusicInfo> mMusicList;

@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+    <ImageView
         android:id="@+id/tv_history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginTop="@dimen/_100sdp"
-        android:fontFamily="@font/poppin_medium"
-        android:text="@string/no_viewed_history"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_13sdp" />
+        android:src="@drawable/iv_nodata"
+        android:textSize="@dimen/_13sdp"
+        android:visibility="visible" />
+
 </RelativeLayout>

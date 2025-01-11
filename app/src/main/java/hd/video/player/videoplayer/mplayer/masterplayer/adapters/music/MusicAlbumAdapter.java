@@ -61,17 +61,16 @@ public class MusicAlbumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType != -1) {
+//        if (viewType != -1) {
             return new AlbumViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_music_album, parent, false));
-        }
-        View emptyView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empty_data, parent, false);
-        ((TextView) emptyView.findViewById(R.id.tv_history)).setText(R.string.no_albums);
-        return new EmptyViewHolder(emptyView);
+//        }
+//        View emptyView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empty_data, parent, false);
+//        return new EmptyViewHolder(emptyView);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if (holder.getItemViewType() != -1) {
+//        if (holder.getItemViewType() != -1) {
             AlbumViewHolder albumViewHolder = (AlbumViewHolder) holder;
             final MusicAlbum musicAlbum = musicAlbums.get(position);
             albumViewHolder.albumNameTextView.setText(musicAlbum.getAlbumName());
@@ -83,7 +82,7 @@ public class MusicAlbumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     .error(R.drawable.ic_music_album)
                     .into(albumViewHolder.albumArtImageView);
             albumViewHolder.itemView.setOnClickListener(view -> onAlbumClick(position, musicAlbum, view));
-        }
+//        }
     }
 
     private void onAlbumClick(int position, MusicAlbum musicAlbum, View view) {

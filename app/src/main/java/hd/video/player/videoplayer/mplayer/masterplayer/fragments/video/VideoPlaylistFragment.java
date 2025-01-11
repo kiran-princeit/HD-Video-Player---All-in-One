@@ -1,6 +1,7 @@
 package hd.video.player.videoplayer.mplayer.masterplayer.fragments.video;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hd.video.player.videoplayer.mplayer.masterplayer.R;
+import hd.video.player.videoplayer.mplayer.masterplayer.activities.VideoPlayListActivity;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.video.PlaylistAdapter;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.customview.NpaGridLayoutManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.video.Playlist;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.repository.VideoDataRepository;
@@ -31,11 +35,12 @@ import hd.video.player.videoplayer.mplayer.masterplayer.dialog.BottomMenuDialogC
 import hd.video.player.videoplayer.mplayer.masterplayer.dialog.InputDialogBuilder;
 import hd.video.player.videoplayer.mplayer.masterplayer.dialog.QuestionDialogBuilder;
 import hd.video.player.videoplayer.mplayer.masterplayer.fragments.BaseFragment;
-import hd.video.player.videoplayer.mplayer.masterplayer.fragments.video.VideoPlaylistDialogFragment;
+
 import hd.video.player.videoplayer.mplayer.masterplayer.presenter.video.PlaylistPresenter;
 import hd.video.player.videoplayer.mplayer.masterplayer.util.FirebaseAnalyticsUtils;
 import hd.video.player.videoplayer.mplayer.masterplayer.util.Utility;
 import hd.video.player.videoplayer.mplayer.masterplayer.view.video.PlaylistView;
+
 public class VideoPlaylistFragment extends BaseFragment<PlaylistPresenter> implements PlaylistView {
     private final ContentObserver contentObserver = new ContentObserver(new Handler()) {
         @Override
@@ -53,6 +58,7 @@ public class VideoPlaylistFragment extends BaseFragment<PlaylistPresenter> imple
     private RecyclerView mRvVideoTabContent;
     private SwipeRefreshLayout refreshLayout;
     private TextView tvTotalPlaylist;
+    ImageView iv_empty;
 
     @Override
     public void onAttach(Context context) {
@@ -81,12 +87,20 @@ public class VideoPlaylistFragment extends BaseFragment<PlaylistPresenter> imple
         refreshLayout = view.findViewById(R.id.swipe_refresh);
         loading = view.findViewById(R.id.loading);
         tvTotalPlaylist = view.findViewById(R.id.tv_total);
+        iv_empty = view.findViewById(R.id.iv_empty);
         view.findViewById(R.id.iv_create_playlist).setOnClickListener(this::showCreatePlaylistDialog);
     }
 
     private void setupRecyclerView() {
         mAdapter = new PlaylistAdapter(new ArrayList<>());
-        mAdapter.setOnItemClickListener((adapter, v, position) -> onPlaylistClick(position, (Playlist) mAdapter.getItem(position)));
+
+        mAdapter.setOnItemClickListener((baseQuickAdapter, view, i) -> {
+            AdManager.showInterstitial(getActivity(), () -> {
+                onPlaylistClick(i, (Playlist
+                        ) mAdapter.getItem(i));
+            });
+
+        });
         mAdapter.setOnItemChildClickListener((adapter, v, position) ->
                 BottomMenuDialogControl.getInstance().showMoreDialogPlaylist(mContext, i ->
                         onPlaylistOptionSelect((Playlist) mAdapter.getItem(position), i, position)
@@ -163,6 +177,14 @@ public class VideoPlaylistFragment extends BaseFragment<PlaylistPresenter> imple
         if (mAdapter != null) {
             mAdapter.setNewData(playlistData);
         }
+
+        if (playlists == null || playlists.isEmpty()) {
+            iv_empty.setVisibility(View.VISIBLE);
+            refreshLayout.setVisibility(View.GONE);
+        } else {
+            iv_empty.setVisibility(View.GONE);
+            refreshLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -182,13 +204,13 @@ public class VideoPlaylistFragment extends BaseFragment<PlaylistPresenter> imple
 
     private void onPlaylistOptionSelect(Playlist playlist, int option, int position) {
         switch (option) {
-            case 0: // Rename
+            case 0:
                 showRenamePlaylistDialog(playlist, position);
                 break;
-            case 1: // Duplicate
+            case 1:
                 showDuplicatePlaylistDialog(playlist);
                 break;
-            case 2: // Delete
+            case 2:
                 showDeletePlaylistDialog(playlist, position);
                 break;
         }
@@ -233,7 +255,8 @@ public class VideoPlaylistFragment extends BaseFragment<PlaylistPresenter> imple
             }
 
             @Override
-            public void onCancelClick() {}
+            public void onCancelClick() {
+            }
         })
                 .setTitle(R.string.delete, mContext.getResources().getColor(R.color.color_FF6666))
                 .setQuestion(R.string.question_remove_playlist)
@@ -241,24 +264,26 @@ public class VideoPlaylistFragment extends BaseFragment<PlaylistPresenter> imple
                 .show();
     }
 
+
     private void onPlaylistClick(int position, Playlist playlist) {
-        VideoPlaylistDialogFragment dialog;
-        String tag;
+        Intent intent = new Intent(getContext(), VideoPlayListActivity.class);
+
         if (position == 0) {
-            dialog = new VideoPlaylistDialogFragment(4);
-            tag = "dialog_recently_video";
+            // For recently watched videos
+            intent.putExtra("folder_type", 4);
         } else if (position == 1) {
-            dialog = new VideoPlaylistDialogFragment(3);
-            tag = "dialog_favorite_video";
+            // For favorite videos
+            intent.putExtra("folder_type", 3);
         } else {
-            dialog = new VideoPlaylistDialogFragment(2, playlist, () -> {
-                if (mPresenter != null) {
-                    mPresenter.openPlaylistTab();
-                }
-            });
-            tag = "dialog_playlist_video";
+            // For a specific playlist
+            intent.putExtra("folder_type", 2);
+            if (mPresenter != null) {
+                mPresenter.openPlaylistTab();
+            }// Type for "playlist_video"
+            intent.putExtra("playlist", playlist);
         }
-        dialog.show(getChildFragmentManager().beginTransaction(), tag);
+
+        startActivity(intent);
     }
 
     @Override

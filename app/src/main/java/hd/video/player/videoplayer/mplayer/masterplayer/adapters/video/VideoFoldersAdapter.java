@@ -52,11 +52,6 @@ public class VideoFoldersAdapter extends Adapter<VideoFoldersAdapter.ViewHolder>
         this.mIsSelectMode = z;
         this.activity = activity;
     }
-
-//    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-//        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_folder_list, viewGroup, false));
-//    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         if (viewType == 1) {
@@ -99,7 +94,7 @@ public class VideoFoldersAdapter extends Adapter<VideoFoldersAdapter.ViewHolder>
             viewHolder.ivMore.setVisibility(8);
             viewHolder.itemView.setOnClickListener(new OnClickListener() {
                 public final void onClick(View view) {
-                    VideoFoldersAdapter.this.m582xc95fd27c(i, view);
+                    VideoFoldersAdapter.this.folderRecentClick(i, view);
                 }
             });
             return;
@@ -114,27 +109,27 @@ public class VideoFoldersAdapter extends Adapter<VideoFoldersAdapter.ViewHolder>
         viewHolder.tvNumber.setText(this.mContext.getResources().getQuantityString(R.plurals.value_of_video, videoFolder.getVideoList().size(), new Object[]{Integer.valueOf(videoFolder.getVideoList().size())}));
         viewHolder.itemView.setOnClickListener(new OnClickListener() {
             public final void onClick(View view) {
-                VideoFoldersAdapter.this.m583x70dbac3d(videoFolder, i, view);
+                VideoFoldersAdapter.this.folderClick(videoFolder, i, view);
             }
         });
         viewHolder.ivMore.setOnClickListener(new OnClickListener() {
             public final void onClick(View view) {
-                VideoFoldersAdapter.this.m584x185785fe(videoFolder, i, view);
+                VideoFoldersAdapter.this.onFolderOptionClick(videoFolder, i, view);
             }
         });
     }
 
-    public void m582xc95fd27c(int i, View view) {
+    public void folderRecentClick(int i, View view) {
         this.mCallback.onFolderClick(new VideoFolder(), i);
         FirebaseAnalyticsUtils.putEventClick(this.mContext, FirebaseAnalyticsUtils.EVENT_PROX_VIDEO_FOLDER, "click_recently");
     }
 
-    public void m583x70dbac3d(VideoFolder videoFolder, int i, View view) {
+    public void folderClick(VideoFolder videoFolder, int i, View view) {
         this.mCallback.onFolderClick(videoFolder, i);
         FirebaseAnalyticsUtils.putEventClick(this.mContext, FirebaseAnalyticsUtils.EVENT_PROX_VIDEO_FOLDER, "click_video_folder");
     }
 
-    public void m584x185785fe(VideoFolder videoFolder, int i, View view) {
+    public void onFolderOptionClick(VideoFolder videoFolder, int i, View view) {
         this.mCallback.onFolderOptionSelect(videoFolder, i);
         FirebaseAnalyticsUtils.putEventClick(this.mContext, FirebaseAnalyticsUtils.EVENT_PROX_VIDEO_FOLDER, "click_more_folder");
     }

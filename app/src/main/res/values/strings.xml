@@ -180,8 +180,17 @@
     <string name="yes_i_like">Yes I Like</string>
     <string name="let_us_know_and_help_us_improve_the_experiance_n_for_users_just_like_you">Let us know and help us improve the experiance\n for users just like you!</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="brightness">Brightness</string>
     <string name="you_haven_t_created_any_playlist">you haven\'t created any playlist</string>
     <string name="allow">Allow</string>
+    <string name="no_internet" translatable="false">No Internet connection found. Check your Connection or try again.</string>
+    <string name="try_again">Try Again</string>
+    <string name="music_player">Musics Player</string>
+    <string name="video_player">HD Video Player</string>
+
+
+    <string name="facebook_app_id">842542450927353</string>
+
+
 </resources>

@@ -179,4 +179,12 @@
     <string name="yes_i_like">Да, мне нравится</string>
     <string name="let_us_know_and_help_us_improve_the_experiance_n_for_users_just_like_you">Сообщите нам, чтобы помочь улучшить опыт пользователей, таких как вы!</string>
 
+    <string name="brightness">Яркость</string>
+    <string name="you_haven_t_created_any_playlist">Вы не создали ни одного плейлиста</string>
+    <string name="allow">Разрешить</string>
+    <string name="no_internet" translatable="false">Соединение с Интернетом не найдено. Проверьте подключение или попробуйте снова.</string>
+    <string name="try_again">Попробовать снова</string>
+    <string name="music_player">Музыкальный плеер</string>
+    <string name="video_player">HD Видео плеер</string>
+
 </resources>

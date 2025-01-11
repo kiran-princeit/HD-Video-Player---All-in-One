@@ -9,8 +9,8 @@
 <!--        <item name="android:navigationBarColor">@android:color/transparent</item>-->
         <item name="colorPrimary">@color/dark_purple</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorPrimaryVariant">@color/dark_purple</item>
-        <item name="colorSecondary">@color/dark_purple</item>
+<!--        <item name="colorPrimaryVariant">@color/dark_purple</item>-->
+<!--        <item name="colorSecondary">@color/dark_purple</item>-->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorControlNormal">@color/black</item>
@@ -29,6 +29,8 @@
         <item name="android:textColorHint">@color/black</item>
         <item name="android:editTextColor">@color/black</item>
     </style>
+
+
     <style name="RatingBar_Wall" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/black</item>
         <item name="colorControlActivated">@color/rating</item>
@@ -206,5 +208,70 @@
         <item name="color_home">@color/transparent</item>
         <item name="color_theme">@color/color_theme_14</item>
     </style>
+
+
+
+    <style name="NativeAdsView">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Ads">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:gravity">left|center_horizontal|clip_horizontal</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:background">@drawable/ads_icon</item>
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">6dp</item>
+        <item name="android:paddingBottom">1dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">Ad</item>
+    </style>
+
+
+    <style name="BannerAdsView">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="AdAttributionView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_marginLeft">3dp</item>
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:text">Ad</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">#FFCC66</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#C6C5C5</item>
+        <item name="colorControlActivated">#03315b</item>
+    </style>
+
+    <style name="interstitial_theme" parent="android:Theme.Translucent.NoTitleBar">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.4</item>
+    </style>
+
+
 
 </resources>

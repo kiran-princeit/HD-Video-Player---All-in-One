@@ -180,5 +180,12 @@
     <string name="yes_i_like">是的，我喜欢</string>
     <string name="let_us_know_and_help_us_improve_the_experiance_n_for_users_just_like_you">让我们知道并帮助我们改进体验\n为像您一样的用户！</string>
 
+    <string name="brightness">亮度</string>
+    <string name="you_haven_t_created_any_playlist">您尚未创建任何播放列表</string>
+    <string name="allow">允许</string>
+    <string name="no_internet" translatable="false">未找到网络连接。检查您的连接或重试。</string>
+    <string name="try_again">重试</string>
+    <string name="music_player">音乐播放器</string>
+    <string name="video_player">高清播放器</string>
 
 </resources>

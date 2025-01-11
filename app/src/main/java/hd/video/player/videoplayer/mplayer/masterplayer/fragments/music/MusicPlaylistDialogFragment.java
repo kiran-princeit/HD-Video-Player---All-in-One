@@ -1,5 +1,7 @@
 package hd.video.player.videoplayer.mplayer.masterplayer.fragments.music;
 
+import static hd.video.player.videoplayer.mplayer.masterplayer.MyApplication.isNetworkConnected;
+
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.RecoverableSecurityException;
@@ -28,6 +30,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -38,14 +41,19 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SearchView.OnQueryTextListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.facebook.shimmer.ShimmerFrameLayout;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
 import hd.video.player.videoplayer.mplayer.masterplayer.R;
 
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.BottomMenuAdapter;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.music.MusicInfoAdapter;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.database.MyDatabase;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.datasource.MusicDatabaseControl;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicArtist;
@@ -71,6 +79,7 @@ import hd.video.player.videoplayer.mplayer.masterplayer.view.MusicDialogView;
 public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogPresenter> implements MusicDialogView, MusicInfoAdapter.MusicInfoCallback {
     ImageView ivAddMusic;
     ImageView ivViewMode;
+    ImageView iv_empty;
     private final ActivityResultLauncher<IntentSenderRequest> launcherDeleteMusic = registerForActivityResult(new StartIntentSenderForResult(), new ActivityResultCallback() {
         public final void onActivityResult(Object obj) {
             MusicPlaylistDialogFragment.this.handleLauncherDeleteMusic((ActivityResult) obj);
@@ -149,7 +158,8 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
         View inflate = layoutInflater.inflate(R.layout.dialog_fragment_playlist_video, viewGroup, false);
-        inflate.findViewById(R.id.tv_cancel_search).setOnClickListener(new OnClickListener() {
+
+       inflate.findViewById(R.id.tv_cancel_search).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 rlSearchView.setVisibility(4);
@@ -170,7 +180,7 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
             @Override
             public void onClick(View view) {
                 onAddVideoClick();
-                Log.e("MusicPlaylistDialogFragment", "onClick: " );
+                Log.e("MusicPlaylistDialogFragment", "onClick: ");
             }
         });
         inflate.findViewById(R.id.iv_sort).setOnClickListener(new OnClickListener() {
@@ -178,7 +188,7 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
             public void onClick(View view) {
                 BottomMenuDialogControl.getInstance().showSortDialogForMusic(mContext, new OkButtonClickListener() {
                     public final void onClick(int i, boolean z) {
-                        MusicPlaylistDialogFragment.this.m669x2aa501f2(i, z);
+                        MusicPlaylistDialogFragment.this.sortClick(i, z);
                     }
                 });
             }
@@ -194,6 +204,7 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
             }
         });
         this.ivAddMusic = (ImageView) inflate.findViewById(R.id.iv_add_video);
+        this.iv_empty = (ImageView) inflate.findViewById(R.id.iv_empty);
         this.ivViewMode = (ImageView) inflate.findViewById(R.id.iv_view_mode);
         this.loading = (ProgressBar) inflate.findViewById(R.id.loading);
         this.rlSearchView = (RelativeLayout) inflate.findViewById(R.id.rl_search_view);
@@ -203,24 +214,27 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
         this.tvFolderName = (TextView) inflate.findViewById(R.id.tv_folder_name);
         this.ivViewMode.setVisibility(8);
         this.mAdapter = new MusicInfoAdapter(requireActivity(), false, this, null);
-        ViewGroup viewGroup2;
-        if (this.mType == 1) {
-            viewGroup2 = (ViewGroup) null;
-            View inflate2 = LayoutInflater.from(this.mContext).inflate(R.layout.layout_empty_video_in_playlist, null);
-            ((TextView) inflate2.findViewById(R.id.tv_no_video)).setText(R.string.no_songs);
-            ((TextView) inflate2.findViewById(R.id.tv_add_video)).setText(R.string.add_song);
-            inflate2.findViewById(R.id.rl_add_video).setOnClickListener(new OnClickListener() {
-                public final void onClick(View view) {
-                    MusicPlaylistDialogFragment.this.m663xb108fd1b(view);
-                }
-            });
-        } else {
-            viewGroup2 = (ViewGroup) null;
-            ((TextView) LayoutInflater.from(this.mContext).inflate(R.layout.item_empty_data, null).findViewById(R.id.tv_history)).setText(R.string.no_songs);
-        }
+
+
         this.rvMusicDialog.setAdapter(this.mAdapter);
         this.rvMusicDialog.setLayoutManager(new LinearLayoutManager(this.mContext));
         int i = this.mType;
+
+//        if (this.mType == 1) {
+//            View inflate2 = LayoutInflater.from(this.mContext).inflate(R.layout.layout_empty_video_in_playlist, null);
+//            ((TextView) inflate2.findViewById(R.id.tv_no_video)).setText(R.string.no_songs);
+//            ((TextView) inflate2.findViewById(R.id.tv_add_video)).setText(R.string.add_song);
+//            inflate2.findViewById(R.id.rl_add_video).setOnClickListener(new OnClickListener() {
+//                public final void onClick(View view) {
+//                    onAddVideoClick();
+//                }
+//            });
+////        } else {
+////            viewGroup2 = (ViewGroup) null;
+////            ((TextView) LayoutInflater.from(this.mContext).inflate(R.layout.item_empty_data, null).findViewById(R.id.tv_history)).setText(R.string.no_songs);
+//        }
+//        else
+
         if (i == 2) {
             this.tvFolderName.setText(R.string.favorite);
             ((MusicDialogPresenter) this.mPresenter).getAllFavoriteMusic();
@@ -259,29 +273,21 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
         }
         return inflate;
     }
-    public void m663xb108fd1b(View view) {
-        onAddVideoClick();
-    }
 
     public void onViewCreated(View view, Bundle bundle) {
         super.onViewCreated(view, bundle);
-       
+
     }
 
     public void onMoreClick(final int i, final MusicInfo musicInfo) {
         final boolean checkFavoriteMusicIdExisted = MusicFavoriteUtil.checkFavoriteMusicIdExisted(this.mContext, musicInfo.getId());
         BottomMenuDialogControl.getInstance().showMoreDialogMusic(this.mContext, checkFavoriteMusicIdExisted, new BottomMenuAdapter.Callback() {
             public final void onClick(int i) {
-                MusicPlaylistDialogFragment.this.m668x2facca5a(musicInfo, checkFavoriteMusicIdExisted, i, i);
+                MusicPlaylistDialogFragment.this.moreItemClick(musicInfo, checkFavoriteMusicIdExisted, i, i);
             }
         });
     }
 
-    public void m664x8e93c956() {
-        if (this.mPresenter != null && this.mType == 1) {
-            ((MusicDialogPresenter) this.mPresenter).getAllMusicOfPlaylist(this.mPlaylist);
-        }
-    }
 
     public void createNewPalyList(String str, String str2, MusicInfo musicInfo, int i, String str3) {
         final String trim = str3.trim();
@@ -311,13 +317,13 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
             final int i2 = i;
             Utility.renameAMusic(this.mContext, musicInfo, trim + str2, new OnScanCompletedListener() {
                 public final void onScanCompleted(String str, Uri uri) {
-                    MusicPlaylistDialogFragment.this.m666xdf2049d8(musicInfo2, trim, str4, i2, str, uri);
+                    MusicPlaylistDialogFragment.this.renameMusicRequest(musicInfo2, trim, str4, i2, str, uri);
                 }
             });
         }
     }
 
-    public void m666xdf2049d8(MusicInfo musicInfo, String str, String str2, final int i, String str3, Uri uri) {
+    public void renameMusicRequest(MusicInfo musicInfo, String str, String str2, final int i, String str3, Uri uri) {
         if (uri != null) {
             long parseId;
             musicInfo.setDisplayName(str + str2);
@@ -334,17 +340,13 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
             Log.d("aaa", " renameAMusic = " + musicInfo.toString());
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 public final void run() {
-                    MusicPlaylistDialogFragment.this.m665xb6da0997(i);
+                    mAdapter.notifyItemChanged(i);
                 }
             });
         }
     }
 
-    public void m665xb6da0997(int i) {
-        this.mAdapter.notifyItemChanged(i);
-    }
-
-    public void m668x2facca5a(final MusicInfo musicInfo, boolean z, final int i, int i2) {
+    public void moreItemClick(final MusicInfo musicInfo, boolean z, final int i, int i2) {
         String str = FirebaseAnalyticsUtils.EVENT_PROX_MUSIC_MORE;
         if (i2 == 0) {
             MusicFavoriteUtil.addFavoriteMusicId(this.mContext, musicInfo.getId(), !z);
@@ -359,7 +361,9 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
             } else {
                 new AddToPlaylistDialogBuilder(this.mContext, musicInfo.getId(), allPlaylist, new AddToPlaylistDialogBuilder.OkButtonClickListener() {
                     public final void onClose() {
-                        MusicPlaylistDialogFragment.this.m664x8e93c956();
+                        if (mPresenter != null && mType == 1) {
+                            ((MusicDialogPresenter) mPresenter).getAllMusicOfPlaylist(mPlaylist);
+                        }
                     }
                 }).build().show();
             }
@@ -394,7 +398,6 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
             new QuestionDialogBuilder(this.mContext, new QuestionDialogBuilder.OkButtonClickListener() {
                 public void onCancelClick() {
                 }
-
                 public void onOkClick() {
                     Uri parse = Uri.parse(musicInfo.getUri());
                     if (parse != null) {
@@ -413,7 +416,7 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
                             }
                         } catch (SecurityException e) {
                             // Handle security exception based on API levels
-                            handleSecurityException(contentResolver, parse,musicInfo, i,e);
+                            handleSecurityException(contentResolver, parse, musicInfo, i, e);
                         }
                     } else {
                         Log.e("Delete Error", "Invalid URI: " + musicInfo.getUri());
@@ -424,7 +427,7 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
         }
     }
 
-    private void handleSecurityException(ContentResolver contentResolver, Uri parse,MusicInfo musicInfo,int i, SecurityException e) {
+    private void handleSecurityException(ContentResolver contentResolver, Uri parse, MusicInfo musicInfo, int i, SecurityException e) {
         if (Build.VERSION.SDK_INT >= 30) {
             // Handle for API >= 30
             PendingIntent pendingIntent = MediaStore.createDeleteRequest(contentResolver, Collections.singletonList(parse));
@@ -454,13 +457,21 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
     }
 
     public void onMusicLoader(List<MusicInfo> list) {
+
         this.mMusics = new ArrayList(list);
-        this.mAdapter.updateMusicDataList(list);
-        this.loading.setVisibility(8);
-        this.rvMusicDialog.setVisibility(0);
+
+        if (mMusics == null && mMusics.isEmpty()) {
+            iv_empty.setVisibility(View.VISIBLE);
+            rvMusicDialog.setVisibility(View.GONE);
+        } else {
+            this.mAdapter.updateMusicDataList(list);
+            this.loading.setVisibility(View.GONE);
+            iv_empty.setVisibility(View.GONE);
+            this.rvMusicDialog.setVisibility(View.VISIBLE);
+        }
     }
 
-    public void m669x2aa501f2(int i, boolean z) {
+    public void sortClick(int i, boolean z) {
         MusicInfoAdapter musicInfoAdapter = this.mAdapter;
         if (musicInfoAdapter != null) {
             musicInfoAdapter.sortMusicList(i, z);
@@ -477,7 +488,6 @@ public class MusicPlaylistDialogFragment extends BaseDialogFragment<MusicDialogP
             }
         }).show(getChildFragmentManager().beginTransaction(), "dialog_playlist_add_music");
     }
-
 
     public void setIsNewPlaylist(boolean z) {
         this.mIsNewPlaylist = z;

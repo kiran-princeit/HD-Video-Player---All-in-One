@@ -1,5 +1,7 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -70,6 +72,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
@@ -88,9 +91,28 @@ dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("org.jsoup:jsoup:1.10.3")
 
-    implementation("com.google.firebase:firebase-analytics:18.0.0")
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     implementation("com.github.gayanvoice:android-animations-kotlin:1.0.1")
     implementation("com.android.support:multidex:1.0.3")
+
+
+    implementation("com.google.android.gms:play-services-ads:23.5.0")
+    implementation("com.google.code.gson:gson:2.11.0")
+
+
+    implementation("com.google.android.ump:user-messaging-platform:3.1.0")
+    implementation("android.arch.lifecycle:extensions:1.1.1")
+
+    implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-config")
+
+    //facebook ads
+    implementation("com.facebook.android:audience-network-sdk:6.12.0")
+    implementation ("com.google.ads.mediation:facebook:6.12.0.0")
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+
+
 }

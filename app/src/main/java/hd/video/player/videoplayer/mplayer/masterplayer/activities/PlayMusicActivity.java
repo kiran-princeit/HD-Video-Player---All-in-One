@@ -1,5 +1,7 @@
 package hd.video.player.videoplayer.mplayer.masterplayer.activities;
 
+import static hd.video.player.videoplayer.mplayer.masterplayer.MyApplication.isNetworkConnected;
+
 import android.animation.ObjectAnimator;
 import android.content.ComponentName;
 import android.content.Context;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -24,6 +27,7 @@ import androidx.viewpager2.widget.ViewPager2;
 //import androidx.work.WorkRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ import java.util.List;
 import hd.video.player.videoplayer.mplayer.masterplayer.R;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.music.MusicArtPagerAdapter;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.music.NextInMusicPlaylistAdapter.Callback;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.datasource.MusicDatabaseControl;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicInfo;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.utils.MusicFavoriteUtil;
@@ -81,6 +86,7 @@ public class PlayMusicActivity extends BaseActivity implements OnClickListener, 
             }
         }
     };
+
     private SeekBar seekBar;
     private TextView tvArtist;
     private TextView tvCurrentTime;
@@ -89,10 +95,16 @@ public class PlayMusicActivity extends BaseActivity implements OnClickListener, 
     private TextView tvTotalTime;
     private boolean updateData = false;
     ViewPager2 viewPagerMusicArt;
+    private RelativeLayout adContainer;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_play_music);
+
+        adContainer = findViewById(R.id.adContainer);
+        shimmerFrameLayout = findViewById(R.id.shimmer_container_banner);
+        loadBannerAd();
 
         this.btnPlayPause = (ImageView) findViewById(R.id.img_btn_play);
         this.imgBtnPrev = (ImageView) findViewById(R.id.img_btn_previous);
@@ -197,6 +209,17 @@ public class PlayMusicActivity extends BaseActivity implements OnClickListener, 
         });
     }
 
+    private void loadBannerAd() {
+        if (adContainer != null && !isNetworkConnected(PlayMusicActivity.this)) {
+            adContainer.setVisibility(View.GONE);
+            return;
+        }
+
+        // Call your method to show the ad, e.g., using AdMob or Facebook
+        AdManager.showBanner(adContainer, shimmerFrameLayout, PlayMusicActivity.this);
+    }
+
+
     public void onResume() {
         super.onResume();
         bindService(new Intent(this, MusicService.class), this, 1);
@@ -261,7 +284,7 @@ public class PlayMusicActivity extends BaseActivity implements OnClickListener, 
         }
     }
 
-
+    @Override
     public void onClick(View view) {
         int id = view.getId();
         MusicService musicService;
@@ -359,6 +382,7 @@ public class PlayMusicActivity extends BaseActivity implements OnClickListener, 
             new MusicPlayerEqualizerDialogBuilder(this, musicService.getSessionIdMusic()).build().show();
         }
     }
+
     private void startMediaController() {
         this.handler = new Handler();
         runOnUiThread(this.runnable);
@@ -430,7 +454,8 @@ public class PlayMusicActivity extends BaseActivity implements OnClickListener, 
 
     public void updatePlayPauseState(boolean z) {
         if (z) {
-            this.btnPlayPause.setImageResource(R.drawable.ic_pause_music);;
+            this.btnPlayPause.setImageResource(R.drawable.ic_pause_music);
+            ;
             return;
         }
         this.btnPlayPause.setImageResource(R.drawable.ic_play_music);

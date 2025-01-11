@@ -2,6 +2,7 @@ package hd.video.player.videoplayer.mplayer.masterplayer.fragments.video;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -23,7 +24,9 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
+import hd.video.player.videoplayer.mplayer.masterplayer.activities.VideoPlayListActivity;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.video.VideoFoldersAdapter;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.datasource.VideoDatabaseControl;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.video.VideoFolder;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.video.VideoInfo;
@@ -42,6 +45,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
@@ -67,6 +71,7 @@ public class VideoFolderFragment extends BaseFragment<VideoFolderPresenter> impl
     private TextView tvTotalFolder;
     private int viewMode = 1;
     RecyclerView recyclerView;
+    ImageView iv_empty;
 
     public class AnonymousClass4 implements QuestionDialogBuilder.OkButtonClickListener {
         final int val$position;
@@ -130,11 +135,12 @@ public class VideoFolderFragment extends BaseFragment<VideoFolderPresenter> impl
         if (this.mPresenter != null) {
             ((VideoFolderPresenter) this.mPresenter).openFoldersTab();
         }
-         recyclerView = (RecyclerView) inflate.findViewById(R.id.rv_content_tab);
+        recyclerView = (RecyclerView) inflate.findViewById(R.id.rv_content_tab);
         this.refreshLayout = (SwipeRefreshLayout) inflate.findViewById(R.id.swipe_refresh);
         this.loading = (ProgressBar) inflate.findViewById(R.id.loading);
         this.tvTotalFolder = (TextView) inflate.findViewById(R.id.tv_total);
         this.ivViewMode = (ImageView) inflate.findViewById(R.id.iv_view_mode);
+        iv_empty = inflate.findViewById(R.id.iv_empty);
 
         ivViewMode.setOnClickListener(view -> {
             setViewMode();
@@ -167,7 +173,7 @@ public class VideoFolderFragment extends BaseFragment<VideoFolderPresenter> impl
 
     public void onViewCreated(View view, Bundle bundle) {
         super.onViewCreated(view, bundle);
-       
+
     }
 
     public void onResume() {
@@ -183,6 +189,7 @@ public class VideoFolderFragment extends BaseFragment<VideoFolderPresenter> impl
         super.onPause();
         requireActivity().getContentResolver().unregisterContentObserver(this.contentObserver);
     }
+
     private void setViewMode() {
         if (viewMode == 1) {
             viewMode = 2;
@@ -208,6 +215,14 @@ public class VideoFolderFragment extends BaseFragment<VideoFolderPresenter> impl
         if (videoFoldersAdapter != null) {
             videoFoldersAdapter.updateVideoFolders(list);
         }
+        if (list == null || list.isEmpty()) {
+            iv_empty.setVisibility(View.VISIBLE);
+            refreshLayout.setVisibility(View.GONE);
+        } else {
+            iv_empty.setVisibility(View.GONE);
+            refreshLayout.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public boolean deleteFolder(VideoFolder videoFolder) {
@@ -225,15 +240,6 @@ public class VideoFolderFragment extends BaseFragment<VideoFolderPresenter> impl
                 @Override
                 public void onClick(int i) {
                     String str = FirebaseAnalyticsUtils.EVENT_PROX_VIDEO_FOLDER_MORE;
-//                    if (i == 0) {
-//                        Intent intent = new Intent(mContext, VideoPlayerActivity.class);
-//                        intent.putExtra(IntentExtra.EXTRA_VIDEO_NUMBER, 0);
-//                        intent.putExtra(IntentExtra.EXTRA_VIDEO_AUDIO_MODE, true);
-//                        VideoPlayerActivity.sVideoList = new ArrayList(videoFolder.getVideoList());
-//                        intent.addFlags(C.ENCODING_PCM_32BIT);
-//                        startActivity(intent);
-//                        FirebaseAnalyticsUtils.putEventClick(mContext, str, "click_play_audio_folder");
-//                    } else if (i == 1) {
                     if (i == 0) {
                         new QuestionDialogBuilder(mContext, new AnonymousClass4(videoFolder, i)).setTitle(R.string.delete, mContext.getResources().getColor(R.color.color_FF6666)).setQuestion(R.string.question_remove_file).build().show();
                         FirebaseAnalyticsUtils.putEventClick(mContext, str, "click_delete_folder");
@@ -245,12 +251,21 @@ public class VideoFolderFragment extends BaseFragment<VideoFolderPresenter> impl
             });
         }
     }
-
     public void onFolderClick(VideoFolder videoFolder, int i) {
-        if (i == 0) {
-            new VideoPlaylistDialogFragment(4).show(getChildFragmentManager().beginTransaction(), "dialog_recently_video");
-        } else if (videoFolder != null) {
-            new VideoPlaylistDialogFragment(1, videoFolder).show(getChildFragmentManager().beginTransaction(), "dialog_folder_video");
-        }
+        AdManager.showInterstitial(getActivity(), () -> {
+            Intent intent = new Intent(getActivity(), VideoPlayListActivity.class);
+
+            if (i == 0) {
+                intent.putExtra("folder_type", 4);  // Pass type for recently added videos
+            } else if (videoFolder != null) {
+                intent.putExtra("folder_type", 1);  // Pass type for specific folder videos
+                intent.putExtra("video_folder", videoFolder);
+
+            }
+
+            startActivity(intent);
+        });
     }
+
+
 }

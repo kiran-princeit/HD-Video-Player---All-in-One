@@ -1,6 +1,7 @@
 package hd.video.player.videoplayer.mplayer.masterplayer.fragments.music;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Build;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
@@ -23,9 +25,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import hd.video.player.videoplayer.mplayer.masterplayer.R;
+import hd.video.player.videoplayer.mplayer.masterplayer.activities.MusicPlaylistActivity;
+import hd.video.player.videoplayer.mplayer.masterplayer.adapters.music.MusicInfoAdapter;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.music.MusicPlaylistAdapter;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.base.BaseQuickAdapter;
+import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicInfo;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicPlaylist;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.repository.MusicDataRepository;
 import hd.video.player.videoplayer.mplayer.masterplayer.dialog.BottomMenuDialogControl;
@@ -54,6 +61,7 @@ public class MusicPlaylistFragment extends BaseFragment<MusicPlaylistPresenter> 
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView tvPlaylistCount;
     private int currentViewMode = 1;
+    ImageView iv_empty;
 
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -66,19 +74,25 @@ public class MusicPlaylistFragment extends BaseFragment<MusicPlaylistPresenter> 
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_music_playlist, container, false);
         this.playlistRecyclerView = rootView.findViewById(R.id.rv_content_tab);
         this.swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh);
         this.loadingIndicator = rootView.findViewById(R.id.loading);
         this.tvPlaylistCount = rootView.findViewById(R.id.tv_total);
         this.ivViewModeIcon = rootView.findViewById(R.id.iv_view_mode);
+        this.iv_empty = rootView.findViewById(R.id.iv_empty);
 
         ivViewModeIcon.setOnClickListener(view -> toggleViewMode());
 
         rootView.findViewById(R.id.iv_create_playlist).setOnClickListener(view -> createPlaylist());
 
         playlistAdapter = new MusicPlaylistAdapter(new ArrayList<>());
-        playlistAdapter.setOnItemClickListener((adapter, view, position) -> handlePlaylistItemClick(adapter, view, position));
+        playlistAdapter.setOnItemClickListener((adapter, view, position) ->
+                AdManager.showInterstitial(getActivity(), () -> {
+                    handlePlaylistItemClick(adapter, view, position);
+                })
+        );
         playlistAdapter.setOnItemChildClickListener((adapter, view, position) -> handlePlaylistItemChildClick(adapter, view, position));
 
         gridLayoutManager = new GridLayoutManager(this.fragmentContext, 1);
@@ -160,21 +174,6 @@ public class MusicPlaylistFragment extends BaseFragment<MusicPlaylistPresenter> 
             }
         }).setTitle(R.string.delete, this.fragmentContext.getResources().getColor(R.color.color_FF6666)).setQuestion(R.string.question_remove_playlist).build().show();
         FirebaseAnalyticsUtils.putEventClick(this.fragmentContext, FirebaseAnalyticsUtils.EVENT_PROX_MUSIC_PLAYLIST_MORE, "click_item_delete_playlist");
-
-
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            new QuestionDialogBuilder(fragmentContext, new QuestionDialogBuilder.OkButtonClickListener() {
-//                public void onCancelClick() {}
-//                public void onOkClick() {
-//                    playlistAdapter.remove(position);
-//                    ((MusicPlaylistPresenter) MusicPlaylistTabFragment.this.mPresenter).deletePlaylist(playlist);
-//                }
-//            }).setTitle(R.string.delete, fragmentContext.getColor(R.color.color_FF6666))
-//                    .setQuestion(R.string.question_remove_playlist).build().show();
-//        }
-//
-//        FirebaseAnalyticsUtils.putEventClick(fragmentContext, FirebaseAnalyticsUtils.EVENT_PROX_MUSIC_PLAYLIST_MORE, "click_item_delete_playlist");
     }
 
     public void updatePlaylistName(MusicPlaylist playlist, String newName, int position) {
@@ -219,7 +218,7 @@ public class MusicPlaylistFragment extends BaseFragment<MusicPlaylistPresenter> 
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       
+
     }
 
     public void onResume() {
@@ -252,7 +251,20 @@ public class MusicPlaylistFragment extends BaseFragment<MusicPlaylistPresenter> 
         if (playlistAdapter != null) {
             playlistAdapter.setNewData(updatedPlaylists);
         }
+
+
+        if (updatedPlaylists == null || updatedPlaylists.isEmpty()) {
+            // Show the "No Music" message
+            iv_empty.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setVisibility(View.GONE);  // Hide the refresh layout
+        } else {
+            // Hide the "No Music" message and show the refresh layout
+            iv_empty.setVisibility(View.GONE);
+            swipeRefreshLayout.setVisibility(View.VISIBLE);
+        }
+
     }
+
 
     public void onCreatePlaylist(boolean isSuccess, MusicPlaylist playlist) {
         if (isSuccess) {
@@ -309,27 +321,30 @@ public class MusicPlaylistFragment extends BaseFragment<MusicPlaylistPresenter> 
             }
         }, "").setTitle(R.string.create_new_playlist, getActivity().getResources().getColor(R.color.app_color)).build().show();
     }
+
     public void loadPlaylistTab() {
         if (mPresenter != null) {
             ((MusicPlaylistPresenter) mPresenter).loadPlaylistTab();
         }
     }
 
+
     public void onPlaylistClick(int position, MusicPlaylist playlist) {
-        MusicPlaylistDialogFragment playlistDialogFragment;
+        Intent intent = new Intent(fragmentContext, MusicPlaylistActivity.class);
         String eventType;
+
         if (position == 0) {
-            playlistDialogFragment = new MusicPlaylistDialogFragment(2);
+            intent.putExtra("type", 2); // Favorite
             eventType = "click_favorite";
         } else {
-            playlistDialogFragment = new MusicPlaylistDialogFragment(1, playlist, new MusicPlaylistDialogFragment.Callback() {
-                public void onDialogDismiss() {
-                    loadPlaylistTab();
-                }
-            });
+            intent.putExtra("type", 1); // Playlist
+            intent.putExtra("music_playlist", playlist); // Pass the selected playlist
             eventType = "click_music_playlist";
         }
+
         FirebaseAnalyticsUtils.putEventClick(fragmentContext, FirebaseAnalyticsUtils.EVENT_PROX_MUSIC_PLAYLIST, eventType);
-        playlistDialogFragment.show(getChildFragmentManager().beginTransaction(), "dialog_playlist_music");
+        fragmentContext.startActivity(intent);
     }
+
+
 }

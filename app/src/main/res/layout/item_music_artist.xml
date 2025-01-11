@@ -22,8 +22,8 @@
 
         <ImageView
             android:id="@+id/iv_album_art"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_music_icon" />
@@ -45,7 +45,7 @@
                 android:fontFamily="@font/poppin_medium"
                 android:text="Artist"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_10sdp" />
 
             <TextView
                 android:id="@+id/tv_number_song"

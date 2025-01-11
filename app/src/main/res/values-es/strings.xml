@@ -180,4 +180,12 @@
     <string name="yes_i_like">Sí, me gusta</string>
     <string name="let_us_know_and_help_us_improve_the_experiance_n_for_users_just_like_you">¡Haznos saber y ayúdanos a mejorar la experiencia para usuarios como tú!</string>
 
+    <string name="brightness">Brillo</string>
+    <string name="you_haven_t_created_any_playlist">No has creado ninguna lista de reproducción</string>
+    <string name="allow">Permitir</string>
+    <string name="no_internet" translatable="false">No se encontró conexión a Internet. Verifica tu conexión o intenta nuevamente.</string>
+    <string name="try_again">Intentar de nuevo</string>
+    <string name="music_player">Reproductor de Música</string>
+    <string name="video_player">Reproductor de Video HD</string>
+
 </resources>

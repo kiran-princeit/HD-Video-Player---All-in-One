@@ -77,6 +77,7 @@ public class VideoAllFragment extends BaseFragment<VideoInfoPresenter> implement
     private TextView tvTotalVideo;
     private VideoInfo videoDeleteRequest = null;
     private VideoInfo videoRenameRequest = null;
+    ImageView iv_empty;
     private final ActivityResultLauncher<IntentSenderRequest> launcherDeleteVideo =
             registerForActivityResult(new StartIntentSenderForResult(), result -> deleteRequest(result));
 
@@ -102,6 +103,7 @@ public class VideoAllFragment extends BaseFragment<VideoInfoPresenter> implement
         refreshLayout = inflate.findViewById(R.id.swipe_refresh);
         ivViewMode = inflate.findViewById(R.id.iv_view_mode);
         tvTotalVideo = inflate.findViewById(R.id.tv_total_video);
+        iv_empty = inflate.findViewById(R.id.iv_empty);
 
         ivViewMode.setImageResource(R.drawable.ic_grid_view);
 
@@ -151,6 +153,13 @@ public class VideoAllFragment extends BaseFragment<VideoInfoPresenter> implement
         tvTotalVideo.setText(getString(R.string.all_video, list.size()));
         if (mAdapter != null) {
             mAdapter.updateVideoDataList(list);
+        }
+        if (list == null || list.isEmpty()) {
+            iv_empty.setVisibility(View.VISIBLE);
+            refreshLayout.setVisibility(View.GONE);
+        } else {
+            iv_empty.setVisibility(View.GONE);
+            refreshLayout.setVisibility(View.VISIBLE);
         }
     }
 

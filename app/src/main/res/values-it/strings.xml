@@ -179,5 +179,13 @@
     <string name="yes_i_like">Sì, mi piace</string>
     <string name="let_us_know_and_help_us_improve_the_experiance_n_for_users_just_like_you">Faccelo sapere e aiutaci a migliorare l\'esperienza per utenti come te!</string>
 
+    <string name="brightness">Luminosità</string>
+    <string name="you_haven_t_created_any_playlist">Non hai creato nessuna playlist</string>
+    <string name="allow">Consenti</string>
+    <string name="no_internet" translatable="false">Connessione Internet non trovata. Controlla la tua connessione o riprova.</string>
+    <string name="try_again">Riprova</string>
+    <string name="music_player">Lettore musicale</string>
+    <string name="video_player">Lettore video HD</string>
+
 
 </resources>

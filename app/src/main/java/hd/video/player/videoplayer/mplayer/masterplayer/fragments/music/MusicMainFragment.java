@@ -21,9 +21,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -40,6 +42,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import hd.video.player.videoplayer.mplayer.masterplayer.R;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.BottomMenuAdapter;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.music.MusicInfoAdapter;
@@ -88,6 +91,8 @@ public class MusicMainFragment extends BaseFragment<MusicMainPresenter> implemen
     private int positionMusicRequest = -1;
     private SwipeRefreshLayout refreshLayout;
     private TextView tvTotal;
+    ImageView iv_empty;
+
     private List<MusicInfo> mMusics = new ArrayList();
     private NpaGridLayoutManager mGridLayoutManager;
 
@@ -106,6 +111,7 @@ public class MusicMainFragment extends BaseFragment<MusicMainPresenter> implemen
         this.refreshLayout = (SwipeRefreshLayout) inflate.findViewById(R.id.swipe_refresh);
         this.loading = (ProgressBar) inflate.findViewById(R.id.loading);
         this.tvTotal = (TextView) inflate.findViewById(R.id.tv_total);
+        this.iv_empty = (ImageView) inflate.findViewById(R.id.iv_empty);
         inflate.findViewById(R.id.iv_sort).setOnClickListener(new OnClickListener() {
             public final void onClick(View view) {
                 sortMusicList();
@@ -133,7 +139,7 @@ public class MusicMainFragment extends BaseFragment<MusicMainPresenter> implemen
 
     public void onViewCreated(View view, Bundle bundle) {
         super.onViewCreated(view, bundle);
-       
+
     }
 
     public void onResume() {
@@ -158,16 +164,26 @@ public class MusicMainFragment extends BaseFragment<MusicMainPresenter> implemen
         });
         FirebaseAnalyticsUtils.putEventClick(this.mContext, FirebaseAnalyticsUtils.EVENT_PROX_MUSIC_LAYOUT, "click_icon_sort");
     }
+
     public void updateMusicList(List<MusicInfo> list) {
-        this.loading.setVisibility(8);
-        this.refreshLayout.setVisibility(0);
+        this.loading.setVisibility(View.GONE);
+        this.refreshLayout.setVisibility(View.VISIBLE);
         this.refreshLayout.setRefreshing(false);
         this.tvTotal.setText(getString(R.string.all_music, Integer.valueOf(list.size())));
+
         MusicInfoAdapter musicInfoAdapter = this.mAdapter;
         if (musicInfoAdapter != null) {
             musicInfoAdapter.updateMusicDataList(list);
         }
+        if (list == null || list.isEmpty()) {
+            iv_empty.setVisibility(View.VISIBLE);
+            refreshLayout.setVisibility(View.GONE);
+        } else {
+            iv_empty.setVisibility(View.GONE);
+            refreshLayout.setVisibility(View.VISIBLE);
+        }
     }
+
 
     public void onMoreClick(final int i, final MusicInfo musicInfo) {
         final boolean checkFavoriteMusicIdExisted = MusicFavoriteUtil.checkFavoriteMusicIdExisted(this.mContext, musicInfo.getId());

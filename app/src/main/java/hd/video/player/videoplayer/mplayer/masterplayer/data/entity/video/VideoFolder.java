@@ -1,9 +1,10 @@
 package hd.video.player.videoplayer.mplayer.masterplayer.data.entity.video;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoFolder {
+public class VideoFolder implements Serializable {
     private String mName;
     private List<VideoInfo> mVideosList = new ArrayList();
 

@@ -1,6 +1,7 @@
 package hd.video.player.videoplayer.mplayer.masterplayer.fragments.music;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.provider.MediaStore.Audio.Artists;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,8 +22,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 import hd.video.player.videoplayer.mplayer.masterplayer.R;
+import hd.video.player.videoplayer.mplayer.masterplayer.activities.MusicPlaylistActivity;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.music.ArtistListAdapter;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.music.ArtistListAdapter.Callback;
+import hd.video.player.videoplayer.mplayer.masterplayer.adapters.music.MusicAlbumAdapter;
+import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicAlbum;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicArtist;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicInfo;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.repository.MusicDataRepository;
@@ -48,10 +53,10 @@ public class MusicArtistFragment extends BaseFragment<MusicArtistPresenter> impl
     private Context context;
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView totalArtistsTextView;
+    ImageView iv_empty;
 
     @Override
     public void onUpdateMusicOfArtist(List<MusicInfo> musicInfoList) {
-        // You can implement the method here to update the artist's music list
     }
 
     @Override
@@ -73,7 +78,7 @@ public class MusicArtistFragment extends BaseFragment<MusicArtistPresenter> impl
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
         totalArtistsTextView = view.findViewById(R.id.tv_total);
         loadingIndicator = view.findViewById(R.id.loading);
-
+        this.iv_empty = (ImageView) view.findViewById(R.id.iv_empty);
         view.findViewById(R.id.iv_sort).setVisibility(View.GONE);  // Hide sort button
 
         artistAdapter = new ArtistListAdapter(context, new ArrayList<>(), this);
@@ -103,46 +108,40 @@ public class MusicArtistFragment extends BaseFragment<MusicArtistPresenter> impl
             mPresenter.loadArtists();
         }
         FirebaseAnalyticsUtils.putScreenChecking(context, "Music_Artist_Tab");
-
-        // Register content observer for external content changes
         requireActivity().getContentResolver().registerContentObserver(Artists.EXTERNAL_CONTENT_URI, true, contentObserver);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        // Unregister content observer to prevent leaks
         requireActivity().getContentResolver().unregisterContentObserver(contentObserver);
     }
 
-    @Override
-    public void onOpenArtist(List<MusicArtist> artistList) {
-        loadingIndicator.setVisibility(View.GONE);
-        swipeRefreshLayout.setVisibility(View.VISIBLE);
-        swipeRefreshLayout.setRefreshing(false);
+    public void onOpenArtist(List<MusicArtist> list) {
+        this.loadingIndicator.setVisibility(View.GONE);
+        this.swipeRefreshLayout.setVisibility(View.VISIBLE);
+        this.swipeRefreshLayout.setRefreshing(false);
 
-        totalArtistsTextView.setText(getString(R.string.all_artist, artistList.size()));
+        totalArtistsTextView.setText(getString(R.string.all_artist, list.size()));
 
         if (artistAdapter != null) {
-            artistAdapter.updateArtistList(artistList);
+            artistAdapter.updateArtistList(list);
+        }
+        if (list == null || list.isEmpty()) {
+            iv_empty.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setVisibility(View.GONE);
+        } else {
+            iv_empty.setVisibility(View.GONE);
+            swipeRefreshLayout.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     public void onArtistSelected(MusicArtist musicArtist) {
-        // Show music playlist dialog for the selected artist
-        new MusicPlaylistDialogFragment(3, musicArtist, new MusicPlaylistDialogFragment.Callback() {
-            @Override
-            public void onDialogDismiss() {
-                reloadArtistTab();
-            }
-        }).show(getChildFragmentManager(), "dialog_artist_music");
-    }
-
-    private void reloadArtistTab() {
-        if (mPresenter != null) {
-            mPresenter.loadArtists();
-        }
+        Intent intent = new Intent(getContext(), MusicPlaylistActivity.class);
+        intent.putExtra("music_artist", musicArtist);
+        intent.putExtra("type", 3);
+        startActivity(intent);
     }
 }
 

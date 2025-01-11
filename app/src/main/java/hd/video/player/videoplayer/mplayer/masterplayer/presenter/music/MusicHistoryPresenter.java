@@ -38,4 +38,6 @@ public class MusicHistoryPresenter extends BasePresenter<MusicHistoryView> {
     public void deleteAllMusicHistory() {
         this.mMusicRepository.deleteAllMusicHistory();
     }
+
+
 }

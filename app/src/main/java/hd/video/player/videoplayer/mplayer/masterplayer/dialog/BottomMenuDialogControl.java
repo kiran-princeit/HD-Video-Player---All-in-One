@@ -15,7 +15,7 @@ import hd.video.player.videoplayer.mplayer.masterplayer.util.Utility;
 
 public class BottomMenuDialogControl {
     private static BottomMenuDialogControl sInstance;
-    Dialog dialog;
+    Dialog mDialog;
 
     public static BottomMenuDialogControl getInstance() {
         if (sInstance == null) {
@@ -24,18 +24,18 @@ public class BottomMenuDialogControl {
         return sInstance;
     }
 
-    public static void lambda$showSortDialogForMusic$7(Context context, SortDialogBuilder.OkButtonClickListener okButtonClickListener, int i, boolean z) {
+    public static void shortMusicClick(Context context, SortDialogBuilder.OkButtonClickListener okButtonClickListener, int i, boolean z) {
         Utility.setMusicSortModeAndAscending(context, i, z);
         okButtonClickListener.onClick(i, z);
     }
 
-    public static void lambda$showSortDialogForVideo$8(Context context, SortDialogBuilder.OkButtonClickListener okButtonClickListener, int i, boolean z) {
+    public static void sortVideoClick(Context context, SortDialogBuilder.OkButtonClickListener okButtonClickListener, int i, boolean z) {
         Utility.setVideoSortModeAndAscending(context, i, z);
         okButtonClickListener.onClick(i, z);
     }
 
     public void showMoreDialogVideo(Context context, boolean z, Callback callback) {
-        Dialog dialog = this.dialog;
+        Dialog dialog = this.mDialog;
         if (dialog == null || !dialog.isShowing()) {
             int i;
             int i2;
@@ -69,19 +69,23 @@ public class BottomMenuDialogControl {
                             )),
                             new Callback() {
                                 public final void onClick(int i) {
-                                    dialog.dismiss();
-                                    callback.onClick(i);
+                                    BottomMenuDialogControl.this.showmoredialogvideo(callback2, i);
                                 }
                             }
                     )
             ).build();
-            this.dialog = build;
+            this.mDialog = build;
             build.show();
         }
     }
-    
+
+    public void showmoredialogvideo(Callback callback, int i) {
+        this.mDialog.dismiss();
+        callback.onClick(i);
+    }
+
     public void showMoreDialogMusic(Context context, boolean z, final Callback callback) {
-        Dialog dialog = this.dialog;
+        Dialog dialog = this.mDialog;
         if (dialog == null || !dialog.isShowing()) {
             int i;
             int i2;
@@ -94,13 +98,13 @@ public class BottomMenuDialogControl {
             }
             BottomSheetDialog build = new BottomMenuDialogBuilder(
                     context, new BottomMenuAdapter(
-                            new ArrayList(Arrays.asList(
-                                    new Integer[]{Integer.valueOf(i),
-                                            Integer.valueOf(R.string.add_to_playlist),
-                                            Integer.valueOf(R.string.rename),
-                                            Integer.valueOf(R.string.share),
-                                            Integer.valueOf(R.string.info),
-                                            Integer.valueOf(R.string.delete_song)})),
+                    new ArrayList(Arrays.asList(
+                            new Integer[]{Integer.valueOf(i),
+                                    Integer.valueOf(R.string.add_to_playlist),
+                                    Integer.valueOf(R.string.rename),
+                                    Integer.valueOf(R.string.share),
+                                    Integer.valueOf(R.string.info),
+                                    Integer.valueOf(R.string.delete_song)})),
 
                     new ArrayList(Arrays.asList(new Integer[]{Integer.valueOf(i2),
                             Integer.valueOf(R.drawable.ic_menu_add_to_playlist),
@@ -114,18 +118,18 @@ public class BottomMenuDialogControl {
                     BottomMenuDialogControl.this.m604x4fb7305e(callback, i);
                 }
             })).build();
-            this.dialog = build;
+            this.mDialog = build;
             build.show();
         }
     }
 
     public void m604x4fb7305e(Callback callback, int i) {
-        this.dialog.dismiss();
+        this.mDialog.dismiss();
         callback.onClick(i);
     }
 
     public void showMoreDialogVideoFolder(Context context, final Callback callback) {
-        Dialog dialog = this.dialog;
+        Dialog dialog = this.mDialog;
         if (dialog == null || !dialog.isShowing()) {
             BottomSheetDialog build = new BottomMenuDialogBuilder(context, new BottomMenuAdapter(
                     new ArrayList(Arrays.asList(new Integer[]{
@@ -136,76 +140,76 @@ public class BottomMenuDialogControl {
                             Integer.valueOf(R.drawable.ic_menu_info)})), new Callback() {
 
                 public final void onClick(int i) {
-                    BottomMenuDialogControl.this.m608x73c7fe83(callback, i);
+                    BottomMenuDialogControl.this.moredialogclick(callback, i);
                 }
             })).build();
-            this.dialog = build;
+            this.mDialog = build;
             build.show();
         }
     }
 
-    public void m608x73c7fe83(Callback callback, int i) {
-        this.dialog.dismiss();
+    public void moredialogclick(Callback callback, int i) {
+        this.mDialog.dismiss();
         callback.onClick(i);
     }
 
     public void showMoreDialogPlaylist(Context context, final Callback callback) {
-        Dialog dialog = this.dialog;
+        Dialog dialog = this.mDialog;
         if (dialog == null || !dialog.isShowing()) {
             BottomSheetDialog build = new BottomMenuDialogBuilder(context, new BottomMenuAdapter(new ArrayList(Arrays.asList(new Integer[]{Integer.valueOf(R.string.rename), Integer.valueOf(R.string.duplicate_playlist), Integer.valueOf(R.string.delete_playlist)})), new ArrayList(Arrays.asList(new Integer[]{Integer.valueOf(R.drawable.ic_menu_rename), Integer.valueOf(R.drawable.ic_menu_duplicate), Integer.valueOf(R.drawable.ic_delete)})), new Callback() {
                 public final void onClick(int i) {
-                    BottomMenuDialogControl.this.m606x5225561b(callback, i);
+                    BottomMenuDialogControl.this.dialogclick(callback, i);
                 }
             })).build();
-            this.dialog = build;
+            this.mDialog = build;
             build.show();
         }
     }
 
-    public void m606x5225561b(Callback callback, int i) {
-        this.dialog.dismiss();
+    public void dialogclick(Callback callback, int i) {
+        this.mDialog.dismiss();
         callback.onClick(i);
     }
 
     public void showMoreDialogHistory(Context context, final Callback callback) {
-        Dialog dialog = this.dialog;
+        Dialog dialog = this.mDialog;
         if (dialog == null || !dialog.isShowing()) {
             BottomSheetDialog build = new BottomMenuDialogBuilder(context, new BottomMenuAdapter(new ArrayList(Arrays.asList(new Integer[]{Integer.valueOf(R.string.delete_from_history), Integer.valueOf(R.string.delete_file), Integer.valueOf(R.string.info)})), new ArrayList(Arrays.asList(new Integer[]{Integer.valueOf(R.drawable.ic_delete), Integer.valueOf(R.drawable.ic_delete), Integer.valueOf(R.drawable.ic_menu_info)})), new Callback() {
                 public final void onClick(int i) {
                     BottomMenuDialogControl.this.m603xacf4150(callback, i);
                 }
             })).build();
-            this.dialog = build;
+            this.mDialog = build;
             build.show();
         }
     }
 
     public void m603xacf4150(Callback callback, int i) {
-        this.dialog.dismiss();
+        this.mDialog.dismiss();
         callback.onClick(i);
     }
     public void showSortDialogForMusic(final Context context, final SortDialogBuilder.OkButtonClickListener okButtonClickListener) {
-        Dialog dialog = this.dialog;
+        Dialog dialog = this.mDialog;
         if (dialog == null || !dialog.isShowing()) {
             Dialog build = new SortDialogBuilder(context, new SortDialogBuilder.OkButtonClickListener() {
                 public final void onClick(int i, boolean z) {
-                    BottomMenuDialogControl.lambda$showSortDialogForMusic$7(context, okButtonClickListener, i, z);
+                    BottomMenuDialogControl.shortMusicClick(context, okButtonClickListener, i, z);
                 }
             }, Utility.getMusicSortMode(context), Utility.getMusicSortAscending(context)).build();
-            this.dialog = build;
+            this.mDialog = build;
             build.show();
         }
     }
 
     public void showSortDialogForVideo(final Context context, final SortDialogBuilder.OkButtonClickListener okButtonClickListener) {
-        Dialog dialog = this.dialog;
+        Dialog dialog = this.mDialog;
         if (dialog == null || !dialog.isShowing()) {
             Dialog build = new SortDialogBuilder(context, new SortDialogBuilder.OkButtonClickListener() {
                 public final void onClick(int i, boolean z) {
-                    BottomMenuDialogControl.lambda$showSortDialogForVideo$8(context, okButtonClickListener, i, z);
+                    BottomMenuDialogControl.sortVideoClick(context, okButtonClickListener, i, z);
                 }
             }, Utility.getVideoSortMode(context), Utility.getVideoSortAscending(context)).build();
-            this.dialog = build;
+            this.mDialog = build;
             build.show();
         }
     }

@@ -19,6 +19,7 @@ import java.util.List;
 
 import hd.video.player.videoplayer.mplayer.masterplayer.R;
 import hd.video.player.videoplayer.mplayer.masterplayer.activities.PlayMusicActivity;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.database.MyDatabase;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicInfo;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music.MusicPlaylist;
@@ -115,7 +116,10 @@ public class MusicInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     .error(R.drawable.ic_music_icon)
                     .into(musicViewHolder.ivThumbnail);
 
-            musicViewHolder.itemView.setOnClickListener(view -> openMusicPlayer(musicViewHolder, musicInfo, position, view));
+            musicViewHolder.itemView.setOnClickListener(view ->
+                    AdManager.showInterstitial(activity, () -> {
+                        openMusicPlayer(musicViewHolder, musicInfo, position, view);
+                    }));
 
             final boolean isSelected = !musicViewHolder.ivChecked.isSelected();
             musicViewHolder.ivChecked.setActivated(isSelected);

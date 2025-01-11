@@ -1,5 +1,7 @@
 package hd.video.player.videoplayer.mplayer.masterplayer.fragments.video;
 
+import static hd.video.player.videoplayer.mplayer.masterplayer.MyApplication.isNetworkConnected;
+
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.RecoverableSecurityException;
@@ -38,6 +40,9 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.facebook.shimmer.ShimmerFrameLayout;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,6 +51,7 @@ import hd.video.player.videoplayer.mplayer.masterplayer.R;
 
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.BottomMenuAdapter;
 import hd.video.player.videoplayer.mplayer.masterplayer.adapters.video.VideoAdapter;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.dao.video.VideoPlaylistDAO;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.database.MyDatabase;
 import hd.video.player.videoplayer.mplayer.masterplayer.data.datasource.VideoDatabaseControl;
@@ -95,7 +101,7 @@ public class VideoPlaylistDialogFragment extends BaseDialogFragment<VideoDialogP
     private int mType;
     private VideoFolder mVideoFolder;
     private List<VideoInfo> mVideos = new ArrayList();
-    private int positionVideoRequest = -1;
+
     RelativeLayout rlSearchView;
     RelativeLayout rlTitle;
     RecyclerView rvVideoDialog;
@@ -103,6 +109,12 @@ public class VideoPlaylistDialogFragment extends BaseDialogFragment<VideoDialogP
     TextView tvFolderName;
     private VideoInfo videoDeleteRequest = null;
     private VideoInfo videoRenameRequest = null;
+    private int positionVideoRequest = -1;
+
+    private RelativeLayout adContainer;
+    private ShimmerFrameLayout shimmerFrameLayout;
+
+    TextView tv_empty;
 
     public interface Callback {
         void onDialogDismiss();
@@ -159,6 +171,9 @@ public class VideoPlaylistDialogFragment extends BaseDialogFragment<VideoDialogP
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
         View inflate = layoutInflater.inflate(R.layout.dialog_fragment_playlist_video, viewGroup, false);
+
+
+
         inflate.findViewById(R.id.iv_back).setOnClickListener(view -> {
             dismiss();
         });
@@ -210,6 +225,7 @@ public class VideoPlaylistDialogFragment extends BaseDialogFragment<VideoDialogP
         this.rvVideoDialog = (RecyclerView) inflate.findViewById(R.id.rv_video_dialog);
         this.searchView = (SearchView) inflate.findViewById(R.id.search_view);
         this.tvFolderName = (TextView) inflate.findViewById(R.id.tv_folder_name);
+        tv_empty = inflate.findViewById(R.id.tv_empty);
         VideoAdapter videoAdapter = new VideoAdapter(requireActivity(), this.mIsSelectedMode, this, this.mPlaylistSelected);
         this.videoAdapter = videoAdapter;
         this.rvVideoDialog.setAdapter(videoAdapter);
@@ -274,22 +290,20 @@ public class VideoPlaylistDialogFragment extends BaseDialogFragment<VideoDialogP
     }
 
     public void onVideoLoader(List<VideoInfo> list) {
-        Log.d("VideoPlaylist", "Loaded videos: " + list.size());
-        this.mVideos = new ArrayList(list);
-        this.videoAdapter.updateVideoDataList(list);
+        mVideos = new ArrayList<>(list);
+        videoAdapter.updateVideoDataList(list);
 
         if (list == null || list.isEmpty()) {
-            loading.setVisibility(View.VISIBLE);
+            tv_empty.setVisibility(View.VISIBLE);
+            loading.setVisibility(View.GONE);
             rvVideoDialog.setVisibility(View.GONE);
         } else {
+            tv_empty.setVisibility(View.GONE);
             loading.setVisibility(View.GONE);
             rvVideoDialog.setVisibility(View.VISIBLE);
         }
-
-
-        this.loading.setVisibility(View.GONE);
-        this.rvVideoDialog.setVisibility(View.VISIBLE);
     }
+
 
     private void setViewMode() {
         if (viewMode == 1) {
@@ -388,13 +402,11 @@ public class VideoPlaylistDialogFragment extends BaseDialogFragment<VideoDialogP
         }
     }
 
-  
-
     public void moreitemclick(final VideoInfo videoInfo, int i, boolean z, final int i2, int i3) {
         String str = FirebaseAnalyticsUtils.EVENT_PROX_VIDEO_MORE;
         switch (i3) {
             case 0:
-                VideoFavoriteUtil.addFavoriteVideoId(this.mContext, videoInfo.getId(), z);
+                VideoFavoriteUtil.addFavoriteVideoId(this.mContext, videoInfo.getId(), !z);
                 if (z && this.mType == 3 && this.mPresenter != null) {
                     ((VideoDialogPresenter) this.mPresenter).getAllFavoriteVideo();
                 }

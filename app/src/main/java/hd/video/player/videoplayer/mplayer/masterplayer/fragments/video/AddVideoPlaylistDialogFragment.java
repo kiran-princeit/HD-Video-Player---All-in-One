@@ -34,6 +34,7 @@ import hd.video.player.videoplayer.mplayer.masterplayer.fragments.BaseDialogFrag
 
 import hd.video.player.videoplayer.mplayer.masterplayer.presenter.video.VideoInfoPresenter;
 
+import hd.video.player.videoplayer.mplayer.masterplayer.util.constant.AppConstant;
 import hd.video.player.videoplayer.mplayer.masterplayer.view.video.VideoInfoView;
 
 public class AddVideoPlaylistDialogFragment extends BaseDialogFragment<VideoInfoPresenter> implements VideoInfoView, VideoAdapter.Callback {
@@ -89,6 +90,7 @@ public class AddVideoPlaylistDialogFragment extends BaseDialogFragment<VideoInfo
 
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        setStyle(0, AppConstant.Themes.THEMES_STYLE[new SettingPreferences(this.mContext).getThemes()]);
 
     }
 

@@ -54,14 +54,42 @@
         app:layout_constraintTop_toBottomOf="@+id/icon" />
 
     <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/txt_app_version">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_container_banner_exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_card_ads"
+            app:shimmer_auto_start="true"
+            app:shimmer_base_color="#ccc">
+
+            <include layout="@layout/ad_unifiled_regular" />
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/adContainerBannerExit"
+            style="@style/NativeAdsView" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="3"
-        app:layout_constraintTop_toBottomOf="@+id/txt_app_version">
-
+        app:layout_constraintTop_toBottomOf="@+id/bottom">
 
         <TextView
             android:id="@+id/tv_dialog_cancel"
@@ -74,10 +102,7 @@
             android:padding="10dp"
             android:text="@string/cancel"
             android:textColor="@color/black"
-            android:textSize="@dimen/_11sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_app_version" />
+            android:textSize="@dimen/_11sdp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tv_dialog_ok"
@@ -89,12 +114,9 @@
             android:fontFamily="@font/poppin_medium"
             android:text="@string/exit"
             android:textAllCaps="false"
-
             android:textColor="@color/white"
             android:textSize="@dimen/_11ssp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSubTitle" />
+            android:visibility="visible" />
     </LinearLayout>
 
 

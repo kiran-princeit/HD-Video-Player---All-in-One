@@ -1,6 +1,8 @@
 package hd.video.player.videoplayer.mplayer.masterplayer.data.entity.music;
 
-public class MusicAlbum {
+import java.io.Serializable;
+
+public class MusicAlbum implements Serializable {
     private long albumId;
     private String albumName;
     private String artistName;
