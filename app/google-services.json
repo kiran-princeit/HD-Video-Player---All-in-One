@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "433408292652",
+    "project_id": "hd-video-player---all-in-one",
+    "storage_bucket": "hd-video-player---all-in-one.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433408292652:android:050a49b742647a35eb5e89",
+        "android_client_info": {
+          "package_name": "hd.video.player.videoplayer.mplayer.masterplayer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "433408292652-6el447hn6s0a6g0s89qo2id5rpkku64o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hd.video.player.videoplayer.mplayer.masterplayer",
+            "certificate_hash": "cc0abedae40132fb0b67bbd0799687df137246a8"
+          }
+        },
+        {
+          "client_id": "433408292652-li28l61buiil0ndp6rcdb3q1hv621f43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKyJLgvxrO5OlGyUbdibjRIsOYrZSZKDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "433408292652-li28l61buiil0ndp6rcdb3q1hv621f43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

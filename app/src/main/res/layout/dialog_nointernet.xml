@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="@dimen/_260sdp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_center_dialog"
+        android:gravity="bottom|center_vertical|center_horizontal|center"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/poppin_medium"
+            android:text="No Internet"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppin_medium"
+            android:text="@string/default_message"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_9sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="end"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_toLeftOf="@+id/btn_rename"
+                android:background="@drawable/bg_main"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/sf_regular"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnTyrAgain"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/bg_main"
+                android:fontFamily="@font/sf_medium"
+                android:text="@string/try_again"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
