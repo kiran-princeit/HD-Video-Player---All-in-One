@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -161,7 +162,7 @@ public class SplashActivity extends BaseActivity {
         dialog.setContentView(R.layout.dialog_nointernet);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-        AppCompatButton btnCancel = dialog.findViewById(R.id.btnCancel);
+        TextView btnCancel = dialog.findViewById(R.id.btnCancel);
         AppCompatButton btnPositive = dialog.findViewById(R.id.btnTyrAgain);
 
         btnPositive.setOnClickListener(v -> {

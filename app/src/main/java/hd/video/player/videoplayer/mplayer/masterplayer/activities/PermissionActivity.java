@@ -9,6 +9,8 @@ import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.provider.Settings.System;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -26,9 +28,7 @@ import hd.video.player.videoplayer.mplayer.masterplayer.R;
 import hd.video.player.videoplayer.mplayer.masterplayer.Const;
 import hd.video.player.videoplayer.mplayer.masterplayer.Pref;
 import hd.video.player.videoplayer.mplayer.masterplayer.util.PermissionUtils;
-import render.animations.Attention;
-import render.animations.Bounce;
-import render.animations.Render;
+
 
 
 public class PermissionActivity extends BaseActivity {
@@ -56,16 +56,13 @@ public class PermissionActivity extends BaseActivity {
         btnPermission = findViewById(R.id.btnPermission);
         btnNext = findViewById(R.id.btnNext);
 
-        Render render = new Render(PermissionActivity.this);
-        render.setAnimation(new Attention().Shake(btnPermission));
-        render.setDuration(1600);
-        render.start();
+        final Animation animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        btnNext.startAnimation(animShake);
 
 
-//        Render render1 = new Render(PermissionActivity.this);
-//        render1.setAnimation(new Attention().Shake(btnNext));
-//        render1.setDuration(1600);
-//        render1.start();
+        final Animation animShake2 = AnimationUtils.loadAnimation(this, R.anim.shake);
+        btnPermission.startAnimation(animShake2);
+
 
 
         // Button click listeners

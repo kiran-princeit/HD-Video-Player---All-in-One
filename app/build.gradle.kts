@@ -93,7 +93,6 @@ dependencies {
 
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    implementation("com.github.gayanvoice:android-animations-kotlin:1.0.1")
     implementation("com.android.support:multidex:1.0.3")
 
 

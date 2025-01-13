@@ -5,8 +5,6 @@ import static hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.Glob
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -32,12 +30,10 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.Date;
-import java.util.Locale;
 
 import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdManager;
-import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.GoogleMobileAdsConsentManager;
+import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.AdsConsentManager;
 import hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.RemoteAppDataModel;
-import hd.video.player.videoplayer.mplayer.masterplayer.data.utils.SettingPreferences;
 import hd.video.player.videoplayer.mplayer.masterplayer.util.LanguagePreference;
 import hd.video.player.videoplayer.mplayer.masterplayer.util.LocaleHelper;
 
@@ -167,8 +163,8 @@ public class MyApplication extends Application implements Application.ActivityLi
     private class AppOpenAdManager {
 
         private static final String LOG_TAG = "AppOpenAdManager";
-        private final GoogleMobileAdsConsentManager googleMobileAdsConsentManager =
-                GoogleMobileAdsConsentManager.getInstance(getApplicationContext());
+        private final AdsConsentManager adsConsentManager =
+                AdsConsentManager.getInstance(getApplicationContext());
         private AppOpenAd appOpenAd = null;
         private boolean isLoadingAd = false;
         private boolean isShowingAd = false;
@@ -267,7 +263,7 @@ public class MyApplication extends Application implements Application.ActivityLi
             if (!isAdAvailable()) {
                 Log.d(LOG_TAG, "The app open ad is not ready yet.");
                 onShowAdCompleteListener.onShowAdComplete();
-                if (googleMobileAdsConsentManager.canRequestAds()) {
+                if (adsConsentManager.canRequestAds()) {
                     loadAd(currentActivity);
                 }
                 return;
@@ -287,7 +283,7 @@ public class MyApplication extends Application implements Application.ActivityLi
 //                            Toast.makeText(activity, "onAdDismissedFullScreenContent", Toast.LENGTH_SHORT).show();
 
                             onShowAdCompleteListener.onShowAdComplete();
-                            if (googleMobileAdsConsentManager.canRequestAds()) {
+                            if (adsConsentManager.canRequestAds()) {
                                 loadAd(activity);
                             }
                         }
@@ -302,7 +298,7 @@ public class MyApplication extends Application implements Application.ActivityLi
 //                                    .show();
 
                             onShowAdCompleteListener.onShowAdComplete();
-                            if (googleMobileAdsConsentManager.canRequestAds()) {
+                            if (adsConsentManager.canRequestAds()) {
                                 loadAd(activity);
                             }
                         }

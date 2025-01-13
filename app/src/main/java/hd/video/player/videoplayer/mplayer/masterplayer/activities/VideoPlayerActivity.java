@@ -306,7 +306,7 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
                     VideoPlayerActivity.this.playbackiconsAdapter.notifyDataSetChanged();
                 }
                 if (i == 7) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(VideoPlayerActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(VideoPlayerActivity.this, android.R.style.Theme_Material_Light_Dialog_Alert);
                     builder.setTitle((CharSequence) "Select Playback Speed").setPositiveButton((CharSequence) "Ok", (DialogInterface.OnClickListener) null).setNegativeButton((CharSequence) "Cancel", (DialogInterface.OnClickListener) null);
                     builder.setSingleChoiceItems((CharSequence[]) new String[]{"0.25x", "0.5x", "1x Normal Speed", "1.5x", "2x"}, -1, (DialogInterface.OnClickListener) new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -335,6 +335,7 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
                     });
                     builder.show();
                 }
+
                 if (i == 8 && !VideoPlayerActivity.this.isShowingTrackSelectionDialog && TrackSelectionDialog.hasValidTracks((Player) VideoPlayerActivity.this.player)) {
                     boolean unused = VideoPlayerActivity.this.isShowingTrackSelectionDialog = true;
                     TrackSelectionDialog.createForPlayer(VideoPlayerActivity.this.player, new DialogInterface.OnDismissListener() {
@@ -412,8 +413,6 @@ public class VideoPlayerActivity extends BaseActivity implements View.OnClickLis
         }
         screenOriantation();
         saveVideoToHistory(currentVideo, position);
-
-
     }
 
     private void saveVideoToHistory(VideoInfo video, long currentPosition) {

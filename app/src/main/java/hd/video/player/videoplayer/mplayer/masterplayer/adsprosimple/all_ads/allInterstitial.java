@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,17 @@ public class allInterstitial {
     public static int interstitialcount = 0;
 
     public static void showInterstitial(Activity activity, OnActivityResultLauncher1.OnActivityResultLauncher2 resultLauncher) {
+
+
+        if (appData == null) {
+            appData = new RemoteAppDataModel();
+            return;
+        }
+
+        if (appData.getshowInterstitial() == null || appData.getadstype() == null) {
+            return;
+        }
+
 
         if (!MyApplication.isNetworkConnected(activity)) {
             doNext(activity, resultLauncher);

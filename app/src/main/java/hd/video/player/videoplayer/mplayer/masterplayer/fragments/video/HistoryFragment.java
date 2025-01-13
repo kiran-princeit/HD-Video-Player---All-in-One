@@ -87,15 +87,6 @@ public class HistoryFragment extends Fragment {
         });
     }
 
-    /*
-    * Report
-    * -VideoPlayer
-    *  -Convert Fragments to Activity of MusicPlayer And videoPLayer
-    *
-    *
-    * */
-
-
     @Override
     public void onResume() {
         super.onResume();

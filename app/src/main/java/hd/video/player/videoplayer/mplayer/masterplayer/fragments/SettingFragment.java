@@ -1,5 +1,7 @@
 package hd.video.player.videoplayer.mplayer.masterplayer.fragments;
 
+import static hd.video.player.videoplayer.mplayer.masterplayer.adsprosimple.GlobalVar.appData;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -44,6 +46,7 @@ public class SettingFragment extends Fragment {
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
         View inflate = layoutInflater.inflate(R.layout.fragment_setting, viewGroup, false);
+
         tvLanguageName = inflate.findViewById(R.id.tvLanguageName);
         String selectedLanguageCode = LanguagePreference.getLanguage(getActivity());
         String languageName = getLanguageName(selectedLanguageCode);
@@ -56,8 +59,8 @@ public class SettingFragment extends Fragment {
         });
 
         inflate.findViewById(R.id.llPrivacyPolicy).setOnClickListener(view -> {
-//            String privacyUrl = appData.getprivacyurl();
-//            openPrivacyPolicy(privacyUrl);
+            String privacyUrl = appData.getprivacyurl();
+            openPrivacyPolicy(privacyUrl);
 
         });
 
