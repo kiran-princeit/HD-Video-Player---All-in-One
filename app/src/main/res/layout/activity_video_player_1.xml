@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:fitsSystemWindows="true"
     android:background="@color/black"
     android:gravity="center">
 
@@ -12,6 +13,7 @@
         android:id="@+id/exoplayer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/videotitle"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:focusable="true"
@@ -24,18 +26,137 @@
         app:surface_type="surface_view"
         app:use_controller="true" />
 
+    <TextView
+        android:id="@+id/videotitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_videoOption"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="visible" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_videoOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/recyclerView"
+        android:layout_marginHorizontal="10dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/IVFavorite"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_marginEnd="10sp"
+            android:paddingHorizontal="5dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_favorite_false"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/IVShare"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_toRightOf="@+id/IVFavorite"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_menu_share"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/overlay_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:visibility="visible">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_fast_forward"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="end|top"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="150dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_seek_progress"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="150dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_rewind"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="start|top"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="16dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_brightness"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center|start"
+            android:layout_marginTop="30dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_volume"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center|end"
+            android:layout_marginTop="30dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_play_pause"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/bg_main"
+            android:text="Got it"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
+
     <View
         android:id="@+id/nightmode"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/light_Dark"
         android:visibility="gone" />
 
-    <FrameLayout
-        android:id="@+id/eqFrame"
-        android:layout_width="match_parent"
-        android:layout_height="400sp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent"
-        android:visibility="gone" />
 </RelativeLayout>

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HD Video Player - All in One</string>
     <string name="back_press_question">Press the back button again to exit</string>
-    <string name="allow_for_smooth">Open Setting and Give Manual Permission For Access Location and Camera and Storage For Better and Fast Response</string>
+    <string name="allow_for_smooth">Open Setting and Give Manual Permission For Access Camera and Storage For Better and Fast Response</string>
     <string name="permission_denied_title">Permission Denied:</string>
     <string name="coming_soon">Coming soon</string>
     <string name="playlist_has_only_one_song">Playlist has only one song</string>
@@ -191,6 +191,13 @@
 
 
     <string name="facebook_app_id">842542450927353</string>
+    <string name="please_update_your_app">Please update your app</string>
+    <string name="this_app_version_is_no_longer_supported_please_update_your_app_from_the_play_store">This app version is no longer supported. Please update your app from the Play Store.</string>
 
-
+    <string name="redirect_msg">We have transferred our server, so install our new app by clicking the button below to enjoy the new features of app.</string>
+    <string name="update_msg">We have updated the app , so update app by clicking Update Now and enjoy new features.</string>
+    <string name="redirect_title">Install our new app now and enjoy</string>
+    <string name="update_title">Update app now and enjoy</string>
+    <string name="update_label">Update App</string>
+    <string name="redirect_label">Install App</string>
 </resources>

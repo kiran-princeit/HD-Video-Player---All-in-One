@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/exo_root_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/toolbar"
@@ -21,21 +21,18 @@
             android:visibility="visible">
 
             <ImageView
-                android:id="@+id/video_back"
+                android:id="@+id/ivBack"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
                 android:padding="10dp"
                 android:src="@drawable/ic_arrow_back" />
 
             <TextView
-                android:id="@+id/videotitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxLines="2"
                 android:paddingLeft="10dp"
-                android:text="@string/app_name"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -43,7 +40,7 @@
                 android:id="@+id/video_more"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="end"
                 android:padding="5sp"
                 android:src="@drawable/ic_white_more" />
         </LinearLayout>
@@ -169,8 +166,56 @@
                     android:layout_weight="1"
                     android:src="@drawable/fit" />
             </LinearLayout>
+
+<!--            <TextView-->
+<!--                android:id="@+id/videotitle1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_above="@+id/rl_videoOption1"-->
+<!--                android:layout_weight="1"-->
+<!--                android:maxLines="2"-->
+<!--                android:padding="10dp"-->
+<!--                android:paddingLeft="10dp"-->
+<!--                android:text="@string/app_name"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="16sp" />-->
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/rl_videoOption1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentBottom="true">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/IVFavorite1"-->
+<!--                    android:layout_width="50sp"-->
+<!--                    android:layout_height="50sp"-->
+<!--                    android:layout_marginEnd="10sp"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:src="@drawable/ic_favorite_false"-->
+<!--                    android:tint="@color/white"-->
+<!--                    android:visibility="visible" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/IVShare1"-->
+<!--                    android:layout_width="50sp"-->
+<!--                    android:layout_height="50sp"-->
+<!--                    android:layout_marginEnd="10sp"-->
+<!--                    android:layout_toRightOf="@+id/IVFavorite1"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:src="@drawable/ic_share"-->
+<!--                    android:tint="@color/white"-->
+<!--                    android:visibility="visible" />-->
+
+<!--            </RelativeLayout>-->
+
+
         </LinearLayout>
+
+
+
     </RelativeLayout>
+
 
     <ImageView
         android:id="@+id/exo_lock"

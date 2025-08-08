@@ -1,4 +1,4 @@
-package hd.video.player.videoplayer;
+package com.hdvideoplayer.smartplayer.player;
 
 import android.content.Context;
 

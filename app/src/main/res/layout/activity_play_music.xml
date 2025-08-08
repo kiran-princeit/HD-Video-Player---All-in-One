@@ -4,9 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color"
-    android:orientation="vertical"
-    android:paddingTop="5dp">
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/con_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerMusicArt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/iv_back"
@@ -39,74 +53,14 @@
         android:padding="@dimen/_10sdp"
         android:src="@drawable/ic_menu_share" />
 
-
-    <LinearLayout
-        android:id="@+id/bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_title"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_container_banner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/bg_card_ads"
-            app:shimmer_auto_start="true"
-            app:shimmer_base_color="#ccc">
-
-            <include layout="@layout/load_banner" />
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/adContainer"
-            style="@style/BannerAdsView" />
-
-    </LinearLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/con_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bottom">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/_20sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPagerMusicArt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true" />
-
-        </RelativeLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     <RelativeLayout
         android:id="@+id/cv_music"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_below="@+id/con_main"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/bg_music_play"
-        android:orientation="vertical"
         android:paddingTop="@dimen/_10sdp"
         android:paddingBottom="@dimen/_10sdp">
 
@@ -172,7 +126,6 @@
                 android:padding="@dimen/_11sdp"
                 android:src="@drawable/ic_favorite_false" />
 
-
             <ImageView
                 android:id="@+id/iv_music_playlist"
                 android:layout_width="0dp"
@@ -181,7 +134,6 @@
                 android:background="@drawable/bg_ripple_click"
                 android:padding="@dimen/_10sdp"
                 android:src="@drawable/ic_player_playlist_white" />
-
 
             <ImageView
                 android:id="@+id/iv_lyric"

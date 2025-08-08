@@ -186,6 +186,7 @@
     <string name="try_again">Erneut versuchen</string>
     <string name="music_player">Musikplayer</string>
     <string name="video_player">HD Video Player</string>
+    <string name="this_app_version_is_no_longer_supported_please_update_your_app_from_the_play_store">This app version is no longer supported. Please update your app from the Play Store.</string>
 
 
 </resources>

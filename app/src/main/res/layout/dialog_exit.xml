@@ -86,7 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:weightSum="3"
         app:layout_constraintTop_toBottomOf="@+id/bottom">
@@ -100,6 +100,7 @@
             android:fontFamily="@font/poppin_medium"
             android:gravity="center"
             android:padding="10dp"
+            android:layout_gravity="center"
             android:text="@string/cancel"
             android:textColor="@color/black"
             android:textSize="@dimen/_11sdp" />
@@ -109,6 +110,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:background="@drawable/bg_main"
             android:fontFamily="@font/poppin_medium"

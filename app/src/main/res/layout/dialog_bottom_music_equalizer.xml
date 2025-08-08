@@ -40,13 +40,13 @@
                 android:layout_height="@dimen/_180sdp"
                 android:layout_toStartOf="@+id/layout2">
 
-                <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper
+                <com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBarWrapper
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@+id/textView1"
                     android:layout_marginTop="@dimen/_4sdp">
 
-                    <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBar
+                    <com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBar
                         android:id="@+id/seekBar1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -57,7 +57,7 @@
                         android:splitTrack="false"
                         android:thumb="@drawable/thumb"
                         app:seekBarRotation="CW270" />
-                </hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper>
+                </com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBarWrapper>
 
                 <TextView
                     android:id="@+id/textView1"
@@ -76,13 +76,13 @@
                 android:layout_height="@dimen/_180sdp"
                 android:layout_toStartOf="@+id/layout3">
 
-                <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper
+                <com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBarWrapper
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@+id/textView2"
                     android:layout_marginTop="@dimen/_4sdp">
 
-                    <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBar
+                    <com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBar
                         android:id="@+id/seekBar2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -93,7 +93,7 @@
                         android:splitTrack="false"
                         android:thumb="@drawable/thumb"
                         app:seekBarRotation="CW270" />
-                </hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper>
+                </com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBarWrapper>
 
                 <TextView
                     android:id="@+id/textView2"
@@ -112,13 +112,13 @@
                 android:layout_height="@dimen/_180sdp"
                 android:layout_centerInParent="true">
 
-                <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper
+                <com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBarWrapper
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@+id/textView3"
                     android:layout_marginTop="@dimen/_4sdp">
 
-                    <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBar
+                    <com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBar
                         android:id="@+id/seekBar3"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -129,7 +129,7 @@
                         android:splitTrack="false"
                         android:thumb="@drawable/thumb"
                         app:seekBarRotation="CW270" />
-                </hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper>
+                </com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBarWrapper>
 
                 <TextView
                     android:id="@+id/textView3"
@@ -148,13 +148,13 @@
                 android:layout_height="@dimen/_180sdp"
                 android:layout_toEndOf="@+id/layout3">
 
-                <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper
+                <com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBarWrapper
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@+id/textView4"
                     android:layout_marginTop="@dimen/_4sdp">
 
-                    <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBar
+                    <com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBar
                         android:id="@+id/seekBar4"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -165,7 +165,7 @@
                         android:splitTrack="false"
                         android:thumb="@drawable/thumb"
                         app:seekBarRotation="CW270" />
-                </hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper>
+                </com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBarWrapper>
 
                 <TextView
                     android:id="@+id/textView4"
@@ -183,13 +183,13 @@
                 android:layout_height="@dimen/_180sdp"
                 android:layout_toEndOf="@+id/layout4">
 
-                <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper
+                <com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBarWrapper
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@+id/textView5"
                     android:layout_marginTop="@dimen/_4sdp">
 
-                    <hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBar
+                    <com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBar
                         android:id="@+id/seekBar5"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -200,7 +200,7 @@
                         android:splitTrack="false"
                         android:thumb="@drawable/thumb"
                         app:seekBarRotation="CW270" />
-                </hd.video.player.videoplayer.mplayer.masterplayer.customview.VerticalSeekBarWrapper>
+                </com.hdvideoplayer.smartplayer.player.customview.VerticalSeekBarWrapper>
 
                 <TextView
                     android:id="@+id/textView5"

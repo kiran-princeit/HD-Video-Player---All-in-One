@@ -14,7 +14,6 @@
     <uses-permission
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-<!--    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
@@ -29,6 +28,8 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
 
     <application
         android:name=".MyApplication"
@@ -73,7 +74,8 @@
             android:name=".activities.SplashActivity"
             android:configChanges="orientation"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.MyApp.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -99,6 +101,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:supportsPictureInPicture="true"
             android:taskAffinity=".VideoPlayerTask">
             <intent-filter>
@@ -135,7 +138,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="hd.video.player.videoplayer.mplayer.masterplayer.provider"
+            android:authorities="com.hdvideoplayer.smartplayer.player.mplayer.masterplayer.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -143,18 +146,19 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+
         <service
             android:name=".services.MusicService"
-            android:enabled="true" />
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
 
         <receiver
             android:name=".services.MusicNotificationReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
-                <action android:name="ACTION_PLAY" />
-                <action android:name="ACTION_PREV" />
-                <action android:name="ACTION_NEXT" />
+                <action android:name="MediaPlayer" />
             </intent-filter>
         </receiver>
 
@@ -164,23 +168,22 @@
             android:exported="false"
             android:initOrder="100" />
 
-         <meta-data
-         android:name="firebase_crashlytics_collection_enabled"
-         android:value="false" />
-
-        <activity
-            android:name="com.facebook.ads.AudienceNetworkActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-
         <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+            android:name="firebase_crashlytics_collection_enabled"
+            android:value="false" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713" />
+            android:value="ca-app-pub-7052726085589556~5175038070" />
         <meta-data
             android:name="com.google.android.gms.ads.flag.NATIVE_AD_DEBUGGER_ENABLED"
             android:value="false" />
+
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
     </application>
 
 </manifest>

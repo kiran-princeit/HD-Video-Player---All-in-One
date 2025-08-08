@@ -12,13 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
-<!--        <com.google.android.material.tabs.TabLayout-->
-<!--            android:id="@+id/track_selection_dialog_tab_layout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:tabGravity="start"-->
-<!--            app:tabMode="fixed" />-->
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/track_selection_dialog_tab_layout"
             android:layout_width="match_parent"

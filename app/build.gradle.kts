@@ -5,16 +5,19 @@ plugins {
 }
 
 android {
-    namespace = "hd.video.player.videoplayer.mplayer.masterplayer"
-    compileSdk = 34
+    namespace = "com.hdvideoplayer.smartplayer.player"
+    compileSdk = 35
+    useLibrary("org.apache.http.legacy")
 
     defaultConfig {
-        applicationId = "hd.video.player.videoplayer.mplayer.masterplayer"
+        applicationId = "com.hdvideoplayer.smartplayer.player"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 35
+        versionCode = 8
+        versionName = "1.7"
         multiDexEnabled = true
+        renderscriptTargetApi = 21
+        renderscriptSupportModeEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -38,6 +41,7 @@ android {
         }
         getByName("release") {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -72,6 +76,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0")
+    implementation("com.google.firebase:firebase-crashlytics:19.4.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
@@ -91,27 +96,31 @@ dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("org.jsoup:jsoup:1.10.3")
 
+
+
+    // ✅ USE THIS (latest Play Core Split module)
+    implementation ("com.google.android.play:app-update:2.1.0")
+
+
+
+
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     implementation("com.android.support:multidex:1.0.3")
+    implementation("com.makeramen:roundedimageview:2.3.0")
 
-
-    implementation("com.google.android.gms:play-services-ads:23.5.0")
+    implementation("com.google.android.gms:play-services-ads:23.6.0")
     implementation("com.google.code.gson:gson:2.11.0")
-
 
     implementation("com.google.android.ump:user-messaging-platform:3.1.0")
     implementation("android.arch.lifecycle:extensions:1.1.1")
 
     implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
     implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-config")
 
     //facebook ads
     implementation("com.facebook.android:audience-network-sdk:6.12.0")
-    implementation ("com.google.ads.mediation:facebook:6.12.0.0")
+    implementation("com.google.ads.mediation:facebook:6.12.0.0")
     implementation("com.facebook.shimmer:shimmer:0.5.0")
-
-
 }

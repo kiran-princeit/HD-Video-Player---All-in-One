@@ -16,7 +16,16 @@
             android:layout_marginRight="5dp"
             android:orientation="vertical">
 
-            <TextView style="@style/AdAttributionView" />
+            <TextView
+                android:id="@+id/ad_attribution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_ad_label"
+                android:text="Ad"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <!--            <TextView style="@style/AdAttributionView" />-->
 
             <ImageView
                 android:id="@+id/ad_app_icon"
@@ -121,8 +130,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:gravity="center"
             android:background="@drawable/bg_main"
+            android:gravity="center"
             android:paddingHorizontal="30dp"
             android:paddingVertical="8dp"
             android:text="Install"

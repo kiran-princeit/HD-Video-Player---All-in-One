@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -12,22 +13,21 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+
         <LinearLayout
             android:id="@+id/lin_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/ad_attribution"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/AdAttributionView"
-                    android:layout_gravity="top" />
-
-            </LinearLayout>
+                android:background="@drawable/bg_ad_label"
+                android:text="Ad"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
